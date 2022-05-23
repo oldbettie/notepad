@@ -1,8 +1,14 @@
+import { BrowserRouter } from "react-router-dom";
+import Pages from "./pages/Pages";
+import NavBar from "./components/NavBar";
+
+//  come back for auth provider stuff later
 function App() {
 	return (
-		<div className="App">
-			<h1>template</h1>
-		</div>
+		<BrowserRouter>
+			<NavBar />
+			<Pages />
+		</BrowserRouter>
 	);
 }
 
