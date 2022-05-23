@@ -4,6 +4,9 @@ import axios from "axios";
 import Button from "../components/Button";
 
 function SignUp() {
+	// this line needs to be in every component that needs auth
+	axios.defaults.withCredentials = true;
+
 	const URL = `http://localhost:3000/`;
 	const [username, setUsername] = useState("");
 	const [registerEmail, setRegisterEmail] = useState("");
@@ -14,7 +17,7 @@ function SignUp() {
 		e.preventDefault();
 		console.log("form submitted");
 		axios
-			.post(`${URL}signup`, {
+			.post(`http://localhost:3000/signup`, {
 				userName: username,
 				email: registerEmail,
 				password: registerPassword,
@@ -22,6 +25,9 @@ function SignUp() {
 			.then((res) => {
 				console.log(res);
 				setStatus(res);
+			})
+			.catch((err) => {
+				console.log(err);
 			});
 	}
 
