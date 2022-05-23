@@ -50,9 +50,9 @@ function SignUp() {
 							setRegisterPassword(event.target.value);
 						}}
 					/>
-					<NavLink to={"/"}>
-						<Button content="Register" />
-					</NavLink>
+					{/* <NavLink to={"/"}> */}
+					<Button content="Register" />
+					{/* </NavLink> */}
 				</form>
 				{/* <h2>{status}</h2> */}
 			</div>
