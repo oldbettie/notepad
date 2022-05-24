@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getUserAuth } from "../helpers";
-import styles from "./Login.modules.scss";
+import styles from "./Login.module.scss";
 import Button from "../components/Button";
 import { UserContext } from "../UserContext";
 

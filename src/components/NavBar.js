@@ -7,6 +7,10 @@ function NavBar() {
 	const { user, setUser } = useContext(UserContext);
 	const [userState, setUserState] = useState(false);
 
+	function logout() {
+		localStorage.removeItem("userData");
+	}
+
 	useEffect(() => {
 		if (user != null) {
 			setUserState(user.auth);
@@ -36,7 +40,11 @@ function NavBar() {
 			) : (
 				<div className="navUser">
 					<Button content="Profile" classnames="btn btnNav" />
-					<Button content="Sign Out" classnames="btn btnNav" />
+					<Button
+						content="Sign Out"
+						classnames="btn btnNav"
+						onClick={logout}
+					/>
 				</div>
 			)}
 		</div>
