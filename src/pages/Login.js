@@ -15,42 +15,6 @@ function Login() {
 	const [loginStatus, setLoginStatus] = useState(false);
 	const [error, setError] = useState("");
 
-<<<<<<< HEAD
-	// function login() {
-	// 	axios
-	// 		.post(`${URL}login`, {
-	// 			email: email,
-	// 			password: password,
-	// 		})
-	// 		.then((res) => {
-	// 			if (!res.data.message) {
-	// 				setLoginStatus(res.data.message);
-	// 			} else {
-	// 				console.log(res.data);
-	// 				setLoginStatus(res.data[0].email);
-	// 			}
-	// 		});
-	// }
-	const data = {
-		email: email,
-		password: password,
-	}
-		function login() {
-			fetch(
-				'http://localhost:3000/login', {
-					method: 'POST',
-					mode: 'cors',
-					cache: 'no-cache',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(data)
-				},
-				
-			).then((res) => {
-				if (!res.data.message) {
-					setLoginStatus(res.data.message);
-=======
 	function login(e) {
 		e.preventDefault();
 		axios
@@ -62,7 +26,6 @@ function Login() {
 				if (!res.data.auth) {
 					setLoginStatus(false);
 					setEmail(res.data.message);
->>>>>>> origin
 				} else {
 					console.log(res.data);
 					setUser({
