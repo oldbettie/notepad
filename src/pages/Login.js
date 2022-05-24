@@ -29,6 +29,7 @@ function Login() {
 				} else {
 					console.log(res.data);
 					setUser({
+						auth: true,
 						id: res.data.userId,
 						email: email,
 						userName: res.data.userName,
@@ -41,6 +42,7 @@ function Login() {
 							id: res.data.userId,
 						})
 					);
+
 					setLoginStatus(true);
 					nav("/");
 				}

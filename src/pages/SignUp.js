@@ -16,7 +16,7 @@ function SignUp() {
 	const [email, setEmail] = useState("");
 	const [registerEmail, setRegisterEmail] = useState("");
 	const [registerPassword, setRegisterPassword] = useState("");
-	const [status, setStatus] = useState("");
+	const [status, setStatus] = useState(null);
 	const [loginStatus, setLoginStatus] = useState(false);
 
 	function register(e) {
@@ -30,8 +30,7 @@ function SignUp() {
 			})
 			.then((res) => {
 				console.log(res);
-				setStatus(res);
-				if (res.status === 200) {
+				if (res.data.state) {
 					// then login and redirect
 					axios
 						.post(`${URL}login`, {
@@ -40,11 +39,13 @@ function SignUp() {
 						})
 						.then((res) => {
 							if (!res.data.auth) {
+								setStatus(res.data.message);
 								setLoginStatus(false);
 								setEmail(res.data.message);
 							} else {
 								console.log(res.data);
 								setUser({
+									auth: true,
 									id: res.data.userId,
 									email: email,
 									userName: res.data.userName,
@@ -62,9 +63,13 @@ function SignUp() {
 							}
 						});
 					//------
+				} else {
+					setStatus(res.data.message);
+					console.log(res.data);
 				}
 			})
 			.catch((err) => {
+				setStatus(err.message);
 				console.log(err);
 			});
 	}
@@ -99,7 +104,7 @@ function SignUp() {
 				<Button content="Register" />
 				{/* </NavLink> */}
 			</form>
-			{/* <h2>{status}</h2> */}
+			{status != null && <h2>{status}</h2>}
 		</div>
 	);
 }

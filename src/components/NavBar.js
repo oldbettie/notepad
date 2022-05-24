@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import Button from "./Button";
 
 function NavBar() {
+	const nav = useNavigate();
 	const { user, setUser } = useContext(UserContext);
 	const [userState, setUserState] = useState(false);
 
 	function logout() {
 		localStorage.removeItem("userData");
+		setUser(null);
+		setUserState(null);
+		nav("/");
 	}
 
 	useEffect(() => {
