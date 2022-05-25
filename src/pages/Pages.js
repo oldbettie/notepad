@@ -4,7 +4,7 @@ import Home from "./Home";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Profile from "./Profile";
-import Groups from "./Groups";
+import Subjects from "./Subjects";
 
 function Pages() {
 	const location = useLocation();
@@ -15,7 +15,7 @@ function Pages() {
 			<Route path="/login" element={<Login />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/user/:id" element={<Profile />} />
-			<Route path="/groups" element={<Groups />} />
+			<Route path="/subjects" element={<Subjects />} />
 		</Routes>
 	);
 }
