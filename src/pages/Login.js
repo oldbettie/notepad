@@ -47,7 +47,7 @@ function Login() {
 					nav("/groups");
 				}
 			});
-	}
+		}
 
 	return (
 		<div className={styles.formContainer}>
