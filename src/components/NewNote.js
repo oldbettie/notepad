@@ -32,7 +32,9 @@ function NewNote() {
 			)
 			.then((res) => {
 				setNote("");
-			});
+			}).catch(error){
+                console.log(error);
+            }
 	}
 
 	return (
