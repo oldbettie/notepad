@@ -13,18 +13,27 @@ function EditProfile() {
 	const [lastName, setlastName] = useState("");
 
 	function updateUser(e) {
+		const data = localStorage.getItem("userData");
+		const token = JSON.parse(data).token;
 		e.preventDefault();
 		const URL = `http://localhost:3000/users/${params.id}`;
 		axios
-			.put(URL, {
-				id: params.id,
-				firstName: firstName,
-				lastName: lastName,
-				userName: userName,
-			})
+			.put(
+				URL,
+				{
+					id: params.id,
+					firstName: firstName,
+					lastName: lastName,
+					userName: userName,
+				},
+				{
+					headers: {
+						"x-access-token": token,
+					},
+				}
+			)
 			.then((res) => {
 				window.location.reload();
-				console.log(res);
 			});
 	}
 
