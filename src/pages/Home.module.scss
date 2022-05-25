@@ -1,0 +1,29 @@
+$primary: #ffffff;
+$secondary: #cccccc;
+$third: #444444;
+$postit: #bdc132;
+
+.logoContainer {
+	height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.postit {
+		height: 200px;
+		border: 1px solid black;
+		box-shadow: 5px 10px 5px #888888;
+		transform: rotate(-6deg);
+		background-color: $postit;
+
+		.logo {
+			width: fit-content;
+			padding: 10px 30px;
+			align-items: center;
+		}
+		.line {
+			margin: 30px 20px;
+			border-bottom: 1px solid red;
+		}
+	}
+}

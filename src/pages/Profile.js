@@ -24,10 +24,11 @@ function Profile() {
 			)}
 			<hr />
 			{user && (
-				<div>
+				<div className={styles.userData}>
 					<h3>Username: {user.userName}</h3>
 					{user.firstName && <h3>First name: {user.firstName}</h3>}
 					{user.lastName && <h3>Last name: {user.lastName}</h3>}
+					{user.email && <h3>Email: {user.email}</h3>}
 				</div>
 			)}
 		</div>

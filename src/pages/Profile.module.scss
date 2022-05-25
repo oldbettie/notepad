@@ -21,3 +21,13 @@ $third: #444444;
 	align-items: center;
 	justify-content: space-around;
 }
+.userData {
+	max-width: 100%;
+	min-width: 500px;
+	margin: 1em auto;
+	h3 {
+		border: 1px solid $third;
+		padding: 10px;
+		margin: 10px;
+	}
+}

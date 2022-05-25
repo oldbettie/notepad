@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
+import styles from "./Home.module.scss";
 
 function Home() {
 	const { user, setUser } = useContext(UserContext);
@@ -15,7 +16,19 @@ function Home() {
 		}
 	}, [user]);
 
-	return <h3>{status ? email : ""}</h3>;
+	return (
+		<div>
+			<h3>Welcome back: {status ? email : ""}</h3>
+			<div className={styles.logoContainer}>
+				<div className={styles.postit}>
+					<h1 className={styles.logo}>TEAM NOTES</h1>
+					<div className={styles.line}></div>
+					<div className={styles.line}></div>
+					<div className={styles.line}></div>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default Home;
