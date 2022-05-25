@@ -58,7 +58,7 @@ function SignUp() {
 									})
 								);
 								setLoginStatus(true);
-								nav("/groups");
+								nav('/groups');
 							}
 						});
 				} else {
