@@ -5,6 +5,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import Profile from "./Profile";
 import Subjects from "./Subjects";
+import Subject from "./Subject";
 
 function Pages() {
 	const location = useLocation();
@@ -15,7 +16,9 @@ function Pages() {
 			<Route path="/login" element={<Login />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/user/:id" element={<Profile />} />
-			<Route path="/subjects" element={<Subjects />} />
+			<Route path="/subjects/:id" element={<Subjects />} />
+			<Route path="/subject/:id" element={<Subject />} /> // main function of the
+			app
 		</Routes>
 	);
 }

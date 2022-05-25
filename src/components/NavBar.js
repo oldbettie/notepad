@@ -29,7 +29,7 @@ function NavBar() {
 				<NavLink to={"/"}>
 					<Button content="Home" classnames="btn btnNav" />
 				</NavLink>
-				<NavLink to={"/subjects"}>
+				<NavLink to={`/subjects/${user.id}`}>
 					<Button content="Subjects" classnames="btn btnNav" />
 				</NavLink>
 			</div>

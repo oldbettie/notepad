@@ -1,7 +1,9 @@
 import React from "react";
 
 function SubjectForm() {
-	function createSubject() {}
+	function createSubject(e) {
+		e.preventDefault();
+	}
 
 	return (
 		<div>
