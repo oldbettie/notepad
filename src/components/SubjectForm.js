@@ -8,7 +8,9 @@ import { UserContext } from "../UserContext";
 
 
 function SubjectForm() {
-
+	function createSubject(e) {
+		e.preventDefault();
+	}
 
 	return (
 		<div>
