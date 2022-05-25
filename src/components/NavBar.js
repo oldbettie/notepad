@@ -29,9 +29,13 @@ function NavBar() {
 				<NavLink to={"/"}>
 					<Button content="Home" classnames="btn btnNav" />
 				</NavLink>
-				<NavLink to={`/subjects/${user.id}`}>
-					<Button content="Subjects" classnames="btn btnNav" />
-				</NavLink>
+				{userState ? (
+					<NavLink to={`/subjects/${user.id}`}>
+						<Button content="Subjects" classnames="btn btnNav" />
+					</NavLink>
+				) : (
+					""
+				)}
 			</div>
 
 			{!userState ? (
