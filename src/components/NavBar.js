@@ -11,13 +11,15 @@ function NavBar() {
 	function logout() {
 		localStorage.removeItem("userData");
 		setUser(null);
-		setUserState(null);
+		setUserState(false);
 		nav("/");
 	}
 
 	useEffect(() => {
 		if (user != null) {
 			setUserState(user.auth);
+		} else {
+			setUserState(false);
 		}
 	}, [user]);
 
@@ -43,12 +45,10 @@ function NavBar() {
 				</div>
 			) : (
 				<div className="navUser">
-					<Button content="Profile" classnames="btn btnNav" />
-					<Button
-						content="Sign Out"
-						classnames="btn btnNav"
-						onClick={logout}
-					/>
+					<NavLink to={`/user/${user.id}`}>
+						<Button content="Profile" classnames="btn btnNav" />
+					</NavLink>
+					<Button content="Sign Out" classnames="btn btnNav" onClick={logout} />
 				</div>
 			)}
 		</div>

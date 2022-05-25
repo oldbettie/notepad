@@ -31,7 +31,6 @@ function SignUp() {
 			.then((res) => {
 				console.log(res);
 				if (res.data.state) {
-					// then login and redirect
 					axios
 						.post(`${URL}login`, {
 							email: registerEmail,
@@ -43,7 +42,7 @@ function SignUp() {
 								setLoginStatus(false);
 								setEmail(res.data.message);
 							} else {
-								console.log(res.data);
+								setStatus(res.data.message);
 								setUser({
 									auth: true,
 									id: res.data.userId,
@@ -59,10 +58,9 @@ function SignUp() {
 									})
 								);
 								setLoginStatus(true);
-								nav("/");
+								nav("/groups");
 							}
 						});
-					//------
 				} else {
 					setStatus(res.data.message);
 					console.log(res.data);
@@ -88,6 +86,7 @@ function SignUp() {
 				<input
 					placeholder="Email..."
 					required
+					type="email"
 					onChange={(event) => {
 						setRegisterEmail(event.target.value);
 					}}

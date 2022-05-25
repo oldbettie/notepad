@@ -44,7 +44,7 @@ function Login() {
 					);
 
 					setLoginStatus(true);
-					nav("/");
+					nav("/groups");
 				}
 			});
 	}
