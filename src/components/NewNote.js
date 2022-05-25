@@ -11,8 +11,9 @@ function NewNote() {
 	function submitNote(e) {
 		const data = localStorage.getItem("userData");
 		const token = JSON.parse(data).token;
-		e.preventDefault();
 		const URL = `http://localhost:3000/notes/new`;
+
+		e.preventDefault();
 		axios
 			.post(
 				URL,
@@ -30,7 +31,7 @@ function NewNote() {
 				}
 			)
 			.then((res) => {
-				setNote(null);
+				setNote("");
 			});
 	}
 
