@@ -1,14 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../UserContext";
-import SubjectForm from "../components/SubjectForm";
-import Button from "../components/Button";
+import { NavLink, useParams } from "react-router-dom";
 import axios from "axios";
+import styles from "./Subjects.module.scss";
+import SubjectForm from "../components/SubjectForm";
+import SubjectEditForm from "../components/SubjectEditForm";
+import Button from "../components/Button";
 
 function Subjects() {
+	let params = useParams();
 	const { user, setUser } = useContext(UserContext);
 	const [status, setStatus] = useState(false);
+	const [edit, setEdit] = useState(true);
 	const [newSubject, setNewSubject] = useState(true);
-	const [ownSubjects, setOwnSubjects] = useState(['You have no subjects']);
+	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
 	const URL = `http://localhost:3000/`;
 
 	function writeSubject() {
@@ -26,39 +31,23 @@ function Subjects() {
 		}
 	}, [user]);
 
-	useEffect(() => {
-		getSubjects()
-	}, [])
-
 	function getSubjects() {
-		axios
-			.get(`${URL}subjects/${user.id}`)
-		.then((res) => {
+		axios.get(`${URL}subjects/${params.id}`).then((res) => {
 			const subjects = res.data;
-			console.log(subjects);	//Im not rendering the list properly but the route works
 			setOwnSubjects(subjects);
-			console.log(ownSubjects);
 		});
 	}
+	useEffect(() => {
+		getSubjects();
+	}, []);
 
-	function getOneSubject() {
-		const subjectId = 1; //just to test
+	function deleteSubject(id) {
 		axios
-			.get(`${URL}subject/${subjectId}`)
-			.then((res) => {
-				const subject = res.data[0];
-				console.log(subject.title);
-	});
-
-	}
-
-	function deleteSubject() {
-		const subjectId = 5;
-		axios
-			.delete(`${URL}subject/${subjectId}`)
-			.then(()=> {
-				console.log(`subject ${subjectId} deleted`);
+			.delete(`${URL}subject/${id}`)
+			.then(() => {
+				console.log(`subject ${id} deleted`);
 			})
+			.then(window.location.reload());
 	}
 
 	return (
@@ -71,22 +60,36 @@ function Subjects() {
 					) : (
 						<SubjectForm />
 					)}
-				</>	
+				</>
 			)}
-				<div>
-					<h3>Created subjects</h3>
-					<ul>
-						{ownSubjects.map(subject => {
-							<li>{subject.title}</li>
-						})}
-					</ul>
-				</div>
-				<div>
-					<button onClick={getOneSubject}>test get 1 subject</button>
-					<button onClick={deleteSubject}>test delete 1 subject</button>
-				</div>
+			<div>
+				<h3>Created subjects</h3>
+				{ownSubjects.map((subject) => {
+					return (
+						<div key={subject.id} className={styles.subjectsContainer}>
+							<h2>{subject.title}</h2>
+							{edit ? (
+								<div>
+									<NavLink to={`/subject/${subject.id}`}>
+										<Button content="Join" />
+									</NavLink>
+									<Button
+										content="Edit"
+										onClick={() => setEdit(!edit)}
+									/>
+									<Button
+										content="Delete"
+										onClick={() => deleteSubject(subject.id)}
+									/>
+								</div>
+							) : (
+								<SubjectEditForm id={subject.id} />
+							)}
+						</div>
+					);
+				})}
+			</div>
 		</div>
-
 	);
 }
 

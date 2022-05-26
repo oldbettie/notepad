@@ -25,36 +25,42 @@ function NavBar() {
 
 	return (
 		<div className="navContainer">
-			<div className="navDefault">
-				<NavLink to={"/"}>
-					<Button content="Home" classnames="btn btnNav" />
-				</NavLink>
-				{userState ? (
-					<NavLink to={`/subjects/${user.id}`}>
-						<Button content="Subjects" classnames="btn btnNav" />
+			<div>
+				<div className="navDefault">
+					<NavLink to={"/"}>
+						<Button content="Home" classnames="btn btnNav" />
 					</NavLink>
+					{userState ? (
+						<NavLink to={`/subjects/${user.id}`}>
+							<Button content="Subjects" classnames="btn btnNav" />
+						</NavLink>
+					) : (
+						""
+					)}
+				</div>
+
+				{!userState ? (
+					<div className="navUser">
+						<NavLink to={"/login"}>
+							<Button content="Login" classnames="btn btnNav" />
+						</NavLink>
+						<NavLink to={"/signup"}>
+							<Button content="Sign Up" classnames="btn btnNav" />
+						</NavLink>
+					</div>
 				) : (
-					""
+					<div className="navUser">
+						<NavLink to={`/user/${user.id}`}>
+							<Button content="Profile" classnames="btn btnNav" />
+						</NavLink>
+						<Button
+							content="Sign Out"
+							classnames="btn btnNav"
+							onClick={logout}
+						/>
+					</div>
 				)}
 			</div>
-
-			{!userState ? (
-				<div className="navUser">
-					<NavLink to={"/login"}>
-						<Button content="Login" classnames="btn btnNav" />
-					</NavLink>
-					<NavLink to={"/signup"}>
-						<Button content="Sign Up" classnames="btn btnNav" />
-					</NavLink>
-				</div>
-			) : (
-				<div className="navUser">
-					<NavLink to={`/user/${user.id}`}>
-						<Button content="Profile" classnames="btn btnNav" />
-					</NavLink>
-					<Button content="Sign Out" classnames="btn btnNav" onClick={logout} />
-				</div>
-			)}
 		</div>
 	);
 }

@@ -1,0 +1,31 @@
+$primary: #ffffff;
+$secondary: #cccccc;
+$third: #444444;
+$postit: #ffff88;
+
+.noteContainer {
+	margin: 1em;
+	height: 200px;
+	width: 200px;
+	padding: 5px;
+	border: 1px solid rgba(123, 123, 123, 0.649);
+	box-shadow: 5px 10px 5px #888888;
+	transform: rotate(-6deg);
+	background-color: $postit;
+	.textarea {
+		position: fixed;
+		top: 35px;
+		width: 187px;
+		font-size: 15px;
+	}
+	.noteBtn {
+		position: fixed;
+		right: -5px;
+		top: -5px;
+		padding: 0px 8px;
+		background: none;
+	}
+}
+.noteContainer:hover {
+	cursor: grab;
+}

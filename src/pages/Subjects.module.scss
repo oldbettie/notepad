@@ -1,0 +1,11 @@
+$primary: #ffffff;
+$secondary: #cccccc;
+$third: #444444;
+
+.subjectsContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 1em;
+	max-width: 600px;
+}

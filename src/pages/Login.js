@@ -44,11 +44,10 @@ function Login() {
 					);
 
 					setLoginStatus(true);
-					nav('/groups');
-					///subjects/${user.id}
+					nav(`/subjects/${res.data.userId}`);
 				}
 			});
-		}
+	}
 
 	return (
 		<div className={styles.formContainer}>

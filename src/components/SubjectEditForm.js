@@ -4,7 +4,7 @@ import axios from "axios";
 import { UserContext } from "../UserContext";
 import { useParams } from "react-router-dom";
 
-function SubjectForm() {
+function SubjectEditForm({ id }) {
 	let params = useParams();
 	const nav = useNavigate();
 	const data = localStorage.getItem("userData");
@@ -13,14 +13,13 @@ function SubjectForm() {
 	const { user, setUser } = useContext(UserContext);
 	const [title, setTitle] = useState("");
 
-	function createSubject(e) {
+	function updateSubject(e) {
 		e.preventDefault();
 		axios
-			.post(
-				`${URL}/subjects/${user.id}/new`,
+			.put(
+				`${URL}/subject/${id}`,
 				{
 					title,
-					ownerId: params.id,
 				},
 				{
 					headers: {
@@ -29,12 +28,13 @@ function SubjectForm() {
 				}
 			)
 			.then((res) => {
+				console.log(res);
 				window.location.reload();
 			});
 	}
 	return (
 		<div>
-			<form onSubmit={createSubject}>
+			<form onSubmit={updateSubject}>
 				<input
 					type="text"
 					placeholder="Subject name..."
@@ -42,10 +42,10 @@ function SubjectForm() {
 						setTitle(event.target.value);
 					}}
 				/>
-				<button type="submit">Add Subject</button>
+				<button type="submit">Update Subject</button>
 			</form>
 		</div>
 	);
 }
 
-export default SubjectForm;
+export default SubjectEditForm;
