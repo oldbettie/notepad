@@ -18,11 +18,27 @@ function Note({ content }) {
 			y: p.offset[1],
 		});
 	});
-	useEffect(() => {
-		document.addEventListener("mouseup", updatePosition);
-	}, []);
 
-	function updatePosition() {
+	function updateLocation() {
+		axios
+			.put(
+				`${URL}note/${content.id}`,
+				{
+					x_axis: notePos.x,
+					y_axis: notePos.y,
+				},
+				{
+					headers: {
+						"x-access-token": token,
+					},
+				}
+			)
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 		console.log("mouse release");
 	}
 
@@ -46,7 +62,8 @@ function Note({ content }) {
 			{...bindNotePos()}
 			key={content.id}
 			className={styles.noteContainer}
-			style={{ position: "relative", top: notePos.y, left: notePos.x }}>
+			style={{ position: "relative", top: notePos.y, left: notePos.x }}
+			onMouseUp={updateLocation}>
 			{content.userId === user.id && (
 				<Button
 					content="-"
@@ -56,8 +73,6 @@ function Note({ content }) {
 			)}
 			<h6 className={styles.userName}>{content.user.userName}</h6>
 			<p className={styles.textarea}>{content.note_text}</p>
-			<p>{notePos.x}</p>
-			<p>{notePos.y}</p>
 		</div>
 	);
 }

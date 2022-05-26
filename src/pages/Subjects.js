@@ -6,12 +6,12 @@ import styles from "./Subjects.module.scss";
 import SubjectForm from "../components/SubjectForm";
 import SubjectEditForm from "../components/SubjectEditForm";
 import Button from "../components/Button";
+import Subject from "../components/Subject";
 
 function Subjects() {
 	let params = useParams();
 	const { user, setUser } = useContext(UserContext);
 	const [status, setStatus] = useState(false);
-	const [edit, setEdit] = useState(true);
 	const [newSubject, setNewSubject] = useState(true);
 	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
 	const URL = `http://localhost:3000/`;
@@ -41,15 +41,6 @@ function Subjects() {
 		getSubjects();
 	}, []);
 
-	function deleteSubject(id) {
-		axios
-			.delete(`${URL}subject/${id}`)
-			.then(() => {
-				console.log(`subject ${id} deleted`);
-			})
-			.then(window.location.reload());
-	}
-
 	return (
 		<div>
 			<h2>Welcome to your Subjects</h2>
@@ -65,28 +56,7 @@ function Subjects() {
 			<div>
 				<h3>Created subjects</h3>
 				{ownSubjects.map((subject) => {
-					return (
-						<div key={subject.id} className={styles.subjectsContainer}>
-							<h2>{subject.title}</h2>
-							{edit ? (
-								<div>
-									<NavLink to={`/subject/${subject.id}`}>
-										<Button content="Join" />
-									</NavLink>
-									<Button
-										content="Edit"
-										onClick={() => setEdit(!edit)}
-									/>
-									<Button
-										content="Delete"
-										onClick={() => deleteSubject(subject.id)}
-									/>
-								</div>
-							) : (
-								<SubjectEditForm id={subject.id} />
-							)}
-						</div>
-					);
+					return <Subject subject={subject} />;
 				})}
 			</div>
 		</div>
