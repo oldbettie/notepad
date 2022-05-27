@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import styles from "./NewNote.module.scss";
 
 function NewNote() {
+	const URL = process.env.REACT_APP_URL;
 	let params = useParams();
 	const { user, setUser } = useContext(UserContext);
 	const [note, setNote] = useState(null);
@@ -13,12 +14,11 @@ function NewNote() {
 	function submitNote(e) {
 		const data = localStorage.getItem("userData");
 		const token = JSON.parse(data).token;
-		const URL = `http://localhost:3000/notes/new`;
 
 		e.preventDefault();
 		axios
 			.post(
-				URL,
+				`${URL}notes/new`,
 				{
 					note_text: note,
 					x_axis: 200,

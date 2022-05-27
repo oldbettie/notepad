@@ -10,7 +10,7 @@ function SignUp() {
 	axios.defaults.withCredentials = true;
 
 	const nav = useNavigate();
-	const URL = `http://localhost:3000/`;
+	const URL = process.env.REACT_APP_URL;
 	const { user, setUser } = useContext(UserContext);
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
@@ -23,7 +23,7 @@ function SignUp() {
 		e.preventDefault();
 		console.log("form submitted");
 		axios
-			.post(`http://localhost:3000/signup`, {
+			.post(`${URL}signup`, {
 				userName: username,
 				email: registerEmail,
 				password: registerPassword,
@@ -58,7 +58,7 @@ function SignUp() {
 									})
 								);
 								setLoginStatus(true);
-								nav('/groups');
+								nav("/groups");
 							}
 						});
 				} else {

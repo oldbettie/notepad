@@ -8,6 +8,7 @@ import InviteButton from "./InviteButton";
 import { UserContext } from "../UserContext";
 
 function Subject({ subject }) {
+	const URL = process.env.REACT_APP_URL;
 	const [edit, setEdit] = useState(true);
 	const { user, setUser } = useContext(UserContext);
 
@@ -16,8 +17,9 @@ function Subject({ subject }) {
 			.delete(`${URL}subject/${id}`)
 			.then(() => {
 				console.log(`subject ${id} deleted`);
+				window.location.reload();
 			})
-			.then(window.location.reload());
+			.catch((err) => console.log(err));
 	}
 
 	return (

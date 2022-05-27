@@ -9,7 +9,7 @@ import { UserContext } from "../UserContext";
 function Login() {
 	const nav = useNavigate();
 	const { user, setUser } = useContext(UserContext);
-	const URL = `http://localhost:3000/`;
+	const URL = process.env.REACT_APP_URL;
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loginStatus, setLoginStatus] = useState(false);
@@ -26,6 +26,7 @@ function Login() {
 				if (!res.data.auth) {
 					setLoginStatus(false);
 					setEmail(res.data.message);
+					setError(res.data.message);
 				} else {
 					console.log(res.data);
 					setUser({
@@ -46,7 +47,8 @@ function Login() {
 					setLoginStatus(true);
 					nav(`/subjects/${res.data.userId}`);
 				}
-			});
+			})
+			.catch((err) => console.log(err));
 	}
 
 	return (
@@ -70,6 +72,7 @@ function Login() {
 					}}
 				/>
 				<Button content="Sign in" />
+				{error && <h4>{error}</h4>}
 			</form>
 			{loginStatus && <button onClick={getUserAuth}>Check Auth</button>}
 		</div>

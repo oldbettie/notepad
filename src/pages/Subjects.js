@@ -13,8 +13,8 @@ function Subjects() {
 	const [status, setStatus] = useState(false);
 	const [newSubject, setNewSubject] = useState(true);
 	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
-	const [directTo, setDirectTo] = useState([""])
-	const URL = `http://localhost:3000/`;
+	const URL = process.env.REACT_APP_URL;
+	const [directTo, setDirectTo] = useState([""]);
 
 	function writeSubject() {
 		setNewSubject(!newSubject);
@@ -39,7 +39,7 @@ function Subjects() {
 	}
 	useEffect(() => {
 		getSubjects();
-	}, []);
+	}, [status]);
 
 	return (
 		<div>
@@ -52,8 +52,7 @@ function Subjects() {
 						<SubjectForm />
 					)}
 				</>
-			)
-			}
+			)}
 			<div>
 				<h3>Created subjects</h3>
 				{ownSubjects.map((subject) => {

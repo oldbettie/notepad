@@ -9,7 +9,7 @@ function SubjectEditForm({id}) {
 	const nav = useNavigate();
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
-	const URL = `http://localhost:3000`;
+	const URL = process.env.REACT_APP_URL;
 	const { user, setUser } = useContext(UserContext);
 	const [title, setTitle] = useState("");
 	const [participants, setParticipants] = useState(['no participants yet']);
