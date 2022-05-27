@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../UserContext";
-import { NavLink, useParams } from "react-router-dom";
+import { Navigate, NavLink, useParams } from "react-router-dom";
 import axios from "axios";
-import styles from "./Subjects.module.scss";
 import SubjectForm from "../components/SubjectForm";
-import SubjectEditForm from "../components/SubjectEditForm";
 import Button from "../components/Button";
 import Subject from "../components/Subject";
+import SubjectEditForm from "../components/SubjectEditForm";
 
 function Subjects() {
 	let params = useParams();
@@ -14,6 +13,7 @@ function Subjects() {
 	const [status, setStatus] = useState(false);
 	const [newSubject, setNewSubject] = useState(true);
 	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
+	const [directTo, setDirectTo] = useState([""])
 	const URL = `http://localhost:3000/`;
 
 	function writeSubject() {
@@ -52,7 +52,8 @@ function Subjects() {
 						<SubjectForm />
 					)}
 				</>
-			)}
+			)
+			}
 			<div>
 				<h3>Created subjects</h3>
 				{ownSubjects.map((subject) => {

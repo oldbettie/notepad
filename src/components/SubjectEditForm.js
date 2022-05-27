@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../UserContext";
 import { useParams } from "react-router-dom";
 
-function SubjectEditForm({ id }) {
+function SubjectEditForm({id}) {
 	let params = useParams();
 	const nav = useNavigate();
 	const data = localStorage.getItem("userData");
@@ -12,7 +12,8 @@ function SubjectEditForm({ id }) {
 	const URL = `http://localhost:3000`;
 	const { user, setUser } = useContext(UserContext);
 	const [title, setTitle] = useState("");
-
+	const [participants, setParticipants] = useState(['no participants yet']);
+	console.log(user);
 	function updateSubject(e) {
 		e.preventDefault();
 		axios
@@ -32,6 +33,7 @@ function SubjectEditForm({ id }) {
 				window.location.reload();
 			});
 	}
+
 	return (
 		<div>
 			<form onSubmit={updateSubject}>
