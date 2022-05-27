@@ -6,6 +6,7 @@ import Button from "./Button";
 import styles from "../pages/Subjects.module.scss";
 
 function Subject({ subject }) {
+	const URL = process.env.REACT_APP_URL;
 	const [edit, setEdit] = useState(true);
 
 	function deleteSubject(id) {
@@ -13,8 +14,9 @@ function Subject({ subject }) {
 			.delete(`${URL}subject/${id}`)
 			.then(() => {
 				console.log(`subject ${id} deleted`);
+				window.location.reload();
 			})
-			.then(window.location.reload());
+			.catch((err) => console.log(err));
 	}
 
 	return (

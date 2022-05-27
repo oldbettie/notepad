@@ -9,7 +9,7 @@ function SubjectForm() {
 	const nav = useNavigate();
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
-	const URL = `http://localhost:3000`;
+	const URL = process.env.REACT_APP_URL;
 	const { user, setUser } = useContext(UserContext);
 	const [title, setTitle] = useState("");
 
@@ -17,7 +17,7 @@ function SubjectForm() {
 		e.preventDefault();
 		axios
 			.post(
-				`${URL}/subjects/${user.id}/new`,
+				`${URL}subjects/${user.id}/new`,
 				{
 					title,
 					ownerId: params.id,

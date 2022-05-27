@@ -6,6 +6,7 @@ import Button from "./Button";
 import styles from "../pages/Profile.module.scss";
 
 function EditProfile() {
+	const URL = process.env.REACT_APP_URL;
 	let params = useParams();
 	const { user, setUser } = useContext(UserContext);
 	const [userName, setUserName] = useState("");
@@ -16,10 +17,9 @@ function EditProfile() {
 		const data = localStorage.getItem("userData");
 		const token = JSON.parse(data).token;
 		e.preventDefault();
-		const URL = `http://localhost:3000/users/${params.id}`;
 		axios
 			.put(
-				URL,
+				`${URL}users/${params.id}`,
 				{
 					id: params.id,
 					firstName: firstName,

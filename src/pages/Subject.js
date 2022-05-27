@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useGesture } from "react-use-gesture";
 import NewNote from "../components/NewNote";
@@ -9,7 +9,9 @@ import styles from "./Subject.module.scss";
 function Subject() {
 	let imageRef = useRef();
 	let params = useParams();
-	const URL = `http://localhost:3000/`;
+	const nav = useNavigate();
+	const data = localStorage.getItem("userData");
+	const URL = process.env.REACT_APP_URL;
 	const [subject, setSubject] = useState(null);
 	const [notes, setNotes] = useState([]);
 	const [error, setError] = useState(null);
@@ -31,9 +33,13 @@ function Subject() {
 	);
 
 	function getSubject() {
-		axios.get(`${URL}subject/${params.id}`).then((res) => {
-			setSubject(res.data[0]);
-		});
+		if (!data) {
+			nav("/login");
+		} else {
+			axios.get(`${URL}subject/${params.id}`).then((res) => {
+				setSubject(res.data[0]);
+			});
+		}
 	}
 
 	function getNotes() {

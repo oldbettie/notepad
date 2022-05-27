@@ -14,7 +14,7 @@ function Subjects() {
 	const [status, setStatus] = useState(false);
 	const [newSubject, setNewSubject] = useState(true);
 	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
-	const URL = `http://localhost:3000/`;
+	const URL = process.env.REACT_APP_URL;
 
 	function writeSubject() {
 		setNewSubject(!newSubject);
@@ -39,7 +39,7 @@ function Subjects() {
 	}
 	useEffect(() => {
 		getSubjects();
-	}, []);
+	}, [status]);
 
 	return (
 		<div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export function getUserAuth() {
-	const URL = `http://localhost:3000/`;
+	const URL = process.env.REACT_APP_URL;
 
 	axios
 		.get(`${URL}isAuth`, {

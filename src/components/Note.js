@@ -11,7 +11,7 @@ function Note({ content }) {
 	let [crop, setCrop] = useState({ x: content.x_axis, y: content.y_axis });
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
-	const URL = "http://localhost:3000/";
+	const URL = process.env.REACT_APP_URL;
 
 	useGesture(
 		{
