@@ -32,7 +32,7 @@ function Subject({ subject }) {
 					</NavLink>
 					<Button content="Edit" onClick={() => setEdit(!edit)} />
 					<Button content="Delete" onClick={() => deleteSubject(subject.id)} />
-					<InviteButton subjectId={subject.id} userId={user.id}/>
+					{/* <InviteButton subjectId={subject.id} userId={user.id}/> */}
 				</div>
 			) : (
 				<SubjectEditForm id={subject.id} />

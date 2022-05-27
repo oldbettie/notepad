@@ -8,6 +8,7 @@ import styles from "./Subject.module.scss";
 
 function Subject() {
 	let imageRef = useRef();
+	let containerRef = useRef();
 	let params = useParams();
 	const nav = useNavigate();
 	const data = localStorage.getItem("userData");
@@ -21,12 +22,41 @@ function Subject() {
 		{
 			onDrag: ({ offset: [dx, dy] }) => {
 				setCrop((crop) => ({ ...crop, x: dx, y: dy }));
+				let containerBounds = containerRef.current.getBoundingClientRect();
 			},
 			onPinch: ({ offset: [d] }) => {
 				setCrop((crop) => ({ ...crop, scale: 1 + d / 20000 }));
 			},
+			// onDragEnd: () => {
+			// 	let newCrop = crop;
+			// 	let imageBounds = imageRef.current.getBoundingClientRect();
+			// 	let originalWidth = imageRef.current.clientWidth;
+			// 	let widthOverHang = (imageBounds.width - originalWidth) / 2;
+			// 	console.log(containerBounds);
+			// 	console.log(imageBounds.left);
+
+			// 	if (imageBounds.left > containerBounds.left) {
+			// 		setCrop((crop) => ({ ...crop, x: 0 }));
+			// 	} // else if (imageBounds.right > containerBounds.right) {
+			// 	// 	newCrop.x =
+			// 	// 		-(imageBounds.width - containerBounds.width) + widthOverHang;
+			// 	// }
+			// 	// if (imageBounds.top < containerBounds.top) {
+			// 	// 	newCrop.y = 0;
+			// 	// } else if (imageBounds.bottom > containerBounds.height) {
+			// 	// 	newCrop.y = -(imageBounds.height - containerBounds.height);
+			// 	// }
+
+			// 	setCrop(newCrop);
+			// },
 		},
 		{
+			drag: {
+				initial: () => [crop.x, crop.y],
+			},
+			pinch: {
+				distanceBounds: { min: -8000 },
+			},
 			domTarget: imageRef,
 			eventOptions: { passive: false },
 		}
@@ -41,6 +71,11 @@ function Subject() {
 			});
 		}
 	}
+	useEffect(() => {
+		if (params.id) {
+			getSubject();
+		}
+	}, [params.id]);
 
 	function getNotes() {
 		axios
@@ -61,7 +96,7 @@ function Subject() {
 		getSubject();
 	}, []);
 	return (
-		<div className={styles.outofbounds}>
+		<div className={styles.outofbounds} ref={containerRef}>
 			<div
 				className={styles.screenBackground}
 				ref={imageRef}
@@ -78,7 +113,7 @@ function Subject() {
 							{/*  */}
 							{/*  */}
 							{notes.map((note) => {
-								return <Note content={note} />;
+								return <Note content={note} scale={crop.scale} />;
 							})}
 							{/*  */}
 							{/*  */}

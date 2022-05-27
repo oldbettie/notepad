@@ -5,24 +5,56 @@ import axios from "axios";
 import styles from "./Note.module.scss";
 import Button from "./Button";
 
-function Note({ content }) {
-	let imageRef = useRef();
+function Note({ content, scale }) {
+	let noteRef = useRef();
 	const { user, setUser } = useContext(UserContext);
-	let [crop, setCrop] = useState({ x: content.x_axis, y: content.y_axis });
+	let [noteCrop, setNoteCrop] = useState({ x: content.x_axis, y: content.y_axis });
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
 	const URL = process.env.REACT_APP_URL;
 
 	useGesture(
 		{
-			onDrag: ({ event, offset: [dx, dy] }) => {
+			onDrag: ({ event, movement: [dx, dy] }) => {
+				const xCSS = 2550; //250px less then the css
+				const yCSS = 1150; //250px less then the css
 				event.stopPropagation();
-				setCrop({ x: dx, y: dy });
+				if (dx <= 0 && dy <= 0) {
+					setNoteCrop({ x: 0, y: 0 });
+					console.log("first");
+				} else if (dx >= xCSS * scale && dy <= 0) {
+					setNoteCrop({ x: xCSS, y: 0 });
+					console.log("second");
+				} else if (dx >= xCSS * scale && dy >= yCSS * scale) {
+					setNoteCrop({ x: xCSS, y: yCSS });
+					console.log("third");
+				} else if (dx <= 0 && dy >= yCSS * scale) {
+					setNoteCrop({ x: 0, y: yCSS });
+					console.log("fourth");
+				} else if (dx < 0) {
+					setNoteCrop({ x: 0, y: dy / scale });
+					console.log("fifth");
+				} else if (dy < 0) {
+					setNoteCrop({ x: dx / scale, y: 0 });
+					console.log("sixth");
+				} else if (dy >= yCSS * scale) {
+					setNoteCrop({ x: dx / scale, y: yCSS });
+					console.log("seventh");
+				} else if (dx >= xCSS * scale) {
+					setNoteCrop({ x: xCSS, y: dy / scale });
+					console.log("eight");
+				} else {
+					setNoteCrop({ x: dx / scale, y: dy / scale });
+				}
 			},
 		},
 		{
-			domTarget: imageRef,
+			drag: {
+				initial: () => [noteCrop.x * scale, noteCrop.y * scale],
+			},
+			domTarget: noteRef,
 			eventOptions: { passive: false },
+			preventDefault: true,
 		}
 	);
 
@@ -31,8 +63,8 @@ function Note({ content }) {
 			.put(
 				`${URL}note/${content.id}`,
 				{
-					x_axis: crop.x,
-					y_axis: crop.y,
+					x_axis: noteCrop.x,
+					y_axis: noteCrop.y,
 				},
 				{
 					headers: {
@@ -63,11 +95,11 @@ function Note({ content }) {
 		<div
 			key={content.id}
 			className={styles.noteContainer}
-			ref={imageRef}
+			ref={noteRef}
 			style={{
-				left: crop.x,
+				left: noteCrop.x,
 				position: "absolute",
-				top: crop.y,
+				top: noteCrop.y,
 				touchAction: "none",
 			}}
 			onMouseUp={updateLocation}>
@@ -80,6 +112,9 @@ function Note({ content }) {
 			)}
 			<h6 className={styles.userName}>{content.user.userName}</h6>
 			<p className={styles.textarea}>{content.note_text}</p>
+			{/* <p>{Math.round(noteCrop.x)} X</p>
+			<p>{Math.round(noteCrop.y)} Y</p>
+			<p>{scale}</p> */}
 		</div>
 	);
 }
