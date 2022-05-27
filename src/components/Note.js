@@ -1,31 +1,38 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { UserContext } from "../UserContext";
-import { useDrag } from "react-use-gesture";
+import { useDrag, useGesture } from "react-use-gesture";
 import axios from "axios";
 import styles from "./Note.module.scss";
 import Button from "./Button";
 
 function Note({ content }) {
+	let imageRef = useRef();
 	const { user, setUser } = useContext(UserContext);
-	const [notePos, setnotePos] = useState({ x: content.x_axis, y: content.y_axis });
+	let [crop, setCrop] = useState({ x: content.x_axis, y: content.y_axis });
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
 	const URL = "http://localhost:3000/";
 
-	const bindNotePos = useDrag((p) => {
-		setnotePos({
-			x: p.offset[0],
-			y: p.offset[1],
-		});
-	});
+	useGesture(
+		{
+			onDrag: ({ event, offset: [dx, dy] }) => {
+				event.stopPropagation();
+				setCrop({ x: dx, y: dy });
+			},
+		},
+		{
+			domTarget: imageRef,
+			eventOptions: { passive: false },
+		}
+	);
 
 	function updateLocation() {
 		axios
 			.put(
 				`${URL}note/${content.id}`,
 				{
-					x_axis: notePos.x,
-					y_axis: notePos.y,
+					x_axis: crop.x,
+					y_axis: crop.y,
 				},
 				{
 					headers: {
@@ -33,13 +40,10 @@ function Note({ content }) {
 					},
 				}
 			)
-			.then((res) => {
-				console.log(res);
-			})
+			.then((res) => {})
 			.catch((err) => {
 				console.log(err);
 			});
-		console.log("mouse release");
 	}
 
 	function deleteNote(id) {
@@ -52,17 +56,20 @@ function Note({ content }) {
 			.then((res) => {
 				window.location.reload();
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => {});
 	}
 
 	return (
 		<div
-			{...bindNotePos()}
 			key={content.id}
 			className={styles.noteContainer}
-			style={{ position: "relative", top: notePos.y, left: notePos.x }}
+			ref={imageRef}
+			style={{
+				left: crop.x,
+				position: "absolute",
+				top: crop.y,
+				touchAction: "none",
+			}}
 			onMouseUp={updateLocation}>
 			{content.userId === user.id && (
 				<Button

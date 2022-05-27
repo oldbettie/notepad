@@ -1,18 +1,35 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import axios from "axios";
+import { useGesture } from "react-use-gesture";
 import NewNote from "../components/NewNote";
 import Note from "../components/Note";
 import styles from "./Subject.module.scss";
 
 function Subject() {
+	let imageRef = useRef();
 	let params = useParams();
 	const URL = `http://localhost:3000/`;
 	const [subject, setSubject] = useState(null);
 	const [notes, setNotes] = useState([]);
 	const [error, setError] = useState(null);
+	let [crop, setCrop] = useState({ x: 0, y: 0, scale: 1 });
 
-	// not returning username just the id
+	useGesture(
+		{
+			onDrag: ({ offset: [dx, dy] }) => {
+				setCrop((crop) => ({ ...crop, x: dx, y: dy }));
+			},
+			onPinch: ({ offset: [d] }) => {
+				setCrop((crop) => ({ ...crop, scale: 1 + d / 20000 }));
+			},
+		},
+		{
+			domTarget: imageRef,
+			eventOptions: { passive: false },
+		}
+	);
+
 	function getSubject() {
 		axios.get(`${URL}subject/${params.id}`).then((res) => {
 			setSubject(res.data[0]);
@@ -38,26 +55,34 @@ function Subject() {
 		getSubject();
 	}, []);
 	return (
-		<div>
-			{subject !== null ? (
-				<div>
-					<h1>{subject.title}</h1>
+		<div className={styles.outofbounds}>
+			<div
+				className={styles.screenBackground}
+				ref={imageRef}
+				style={{
+					left: crop.x,
+					top: crop.y,
+					touchAction: "none",
+					transform: `scale(${crop.scale})`,
+				}}>
+				{subject !== null ? (
 					<div>
-						<h1>this is the main board</h1>
-
-						{/*  */}
-						{/*  */}
-						{notes.map((note, index) => {
-							return <Note content={note} />;
-						})}
-						{/*  */}
-						{/*  */}
-						<NewNote />
+						<h1>{subject.title}</h1>
+						<div>
+							{/*  */}
+							{/*  */}
+							{notes.map((note) => {
+								return <Note content={note} />;
+							})}
+							{/*  */}
+							{/*  */}
+						</div>
 					</div>
-				</div>
-			) : (
-				"Loading..."
-			)}
+				) : (
+					"Loading..."
+				)}
+			</div>
+			<NewNote />
 		</div>
 	);
 }
