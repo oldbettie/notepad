@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../UserContext";
-import { NavLink, useParams } from "react-router-dom";
+import { Navigate, NavLink, useParams } from "react-router-dom";
 import axios from "axios";
-import styles from "./Subjects.module.scss";
 import SubjectForm from "../components/SubjectForm";
-import SubjectEditForm from "../components/SubjectEditForm";
 import Button from "../components/Button";
 import Subject from "../components/Subject";
+import SubjectEditForm from "../components/SubjectEditForm";
 
 function Subjects() {
 	let params = useParams();
@@ -15,6 +14,7 @@ function Subjects() {
 	const [newSubject, setNewSubject] = useState(true);
 	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
 	const URL = process.env.REACT_APP_URL;
+	const [directTo, setDirectTo] = useState([""]);
 
 	function writeSubject() {
 		setNewSubject(!newSubject);

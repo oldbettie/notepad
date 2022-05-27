@@ -17,8 +17,7 @@ function Pages() {
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/user/:id" element={<Profile />} />
 			<Route path="/subjects/:id" element={<Subjects />} />
-			<Route path="/subject/:id" element={<Subject />} /> // main function of the
-			app
+			<Route path="/subject/:id" element={<Subject />} /> // main function of the app
 		</Routes>
 	);
 }
