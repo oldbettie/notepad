@@ -18,6 +18,7 @@ function Subject() {
 	const [error, setError] = useState(null);
 	let [crop, setCrop] = useState({ x: 0, y: 0, scale: 1 });
 
+	// controls the overall board movement and zoom
 	useGesture(
 		{
 			onDrag: ({ offset: [dx, dy] }) => {
@@ -49,11 +50,6 @@ function Subject() {
 			});
 		}
 	}
-	useEffect(() => {
-		if (params.id) {
-			getSubject();
-		}
-	}, [params.id]);
 
 	function getNotes() {
 		axios
@@ -62,14 +58,19 @@ function Subject() {
 				setNotes(res.data);
 			})
 			.catch((err) => setError(err));
+		setTimeout(() => {
+			getNotes();
+		}, 6000);
 	}
 
+	// runs once subject has returned
 	useEffect(() => {
 		if (subject !== null) {
 			getNotes();
 		}
 	}, [subject]);
 
+	// runs first to get the subject
 	useEffect(() => {
 		getSubject();
 	}, []);
@@ -89,11 +90,9 @@ function Subject() {
 						<h1>{subject.title}</h1>
 						<div>
 							{/*  */}
-							{/*  */}
 							{notes.map((note) => {
 								return <Note content={note} scale={crop.scale} />;
 							})}
-							{/*  */}
 							{/*  */}
 						</div>
 					</div>

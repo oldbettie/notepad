@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { UserContext } from "../UserContext";
-import { useDrag, useGesture } from "react-use-gesture";
+import { useGesture } from "react-use-gesture";
 import axios from "axios";
 import styles from "./Note.module.scss";
 import Button from "./Button";
@@ -13,6 +13,7 @@ function Note({ content, scale }) {
 	const token = JSON.parse(data).token;
 	const URL = process.env.REACT_APP_URL;
 
+	// all the logic for controlling each note individually
 	useGesture(
 		{
 			onDrag: ({ event, movement: [dx, dy] }) => {
@@ -58,6 +59,7 @@ function Note({ content, scale }) {
 		}
 	);
 
+	// updates the location on the subject board
 	function updateLocation() {
 		axios
 			.put(
