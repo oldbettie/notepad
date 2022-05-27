@@ -27,28 +27,6 @@ function Subject() {
 			onPinch: ({ offset: [d] }) => {
 				setCrop((crop) => ({ ...crop, scale: 1 + d / 20000 }));
 			},
-			// onDragEnd: () => {
-			// 	let newCrop = crop;
-			// 	let imageBounds = imageRef.current.getBoundingClientRect();
-			// 	let originalWidth = imageRef.current.clientWidth;
-			// 	let widthOverHang = (imageBounds.width - originalWidth) / 2;
-			// 	console.log(containerBounds);
-			// 	console.log(imageBounds.left);
-
-			// 	if (imageBounds.left > containerBounds.left) {
-			// 		setCrop((crop) => ({ ...crop, x: 0 }));
-			// 	} // else if (imageBounds.right > containerBounds.right) {
-			// 	// 	newCrop.x =
-			// 	// 		-(imageBounds.width - containerBounds.width) + widthOverHang;
-			// 	// }
-			// 	// if (imageBounds.top < containerBounds.top) {
-			// 	// 	newCrop.y = 0;
-			// 	// } else if (imageBounds.bottom > containerBounds.height) {
-			// 	// 	newCrop.y = -(imageBounds.height - containerBounds.height);
-			// 	// }
-
-			// 	setCrop(newCrop);
-			// },
 		},
 		{
 			drag: {
