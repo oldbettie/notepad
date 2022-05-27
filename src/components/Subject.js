@@ -22,7 +22,6 @@ function Subject({ subject }) {
 
 	return (
 		<div key={subject.id} className={styles.subjectsContainer}>
-			<h2>{subject.title}</h2>
 			{edit ? (
 				<div>
 					<NavLink to={`/subject/${subject.id}`}>
@@ -30,7 +29,7 @@ function Subject({ subject }) {
 					</NavLink>
 					<Button content="Edit" onClick={() => setEdit(!edit)} />
 					<Button content="Delete" onClick={() => deleteSubject(subject.id)} />
-					<InviteButton subjectId={subject.id} userId={user.id}/>
+					<InviteButton subjectId={subject.id}/>
 				</div>
 			) : (
 				<SubjectEditForm id={subject.id} />

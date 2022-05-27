@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 
 function InviteButton(props) {
 	const URL = 'localhost:3001';
     const [createInvite, setCreateInvite] = useState(true);
     const [inviteLink, setInviteLink] = useState(''); 
-    const linkText = `${URL}/?subject=${props.subjectId}&owner=${props.userId}`;
+    const linkText = `${URL}/subject/${props.subjectId}`;
     
     function createLinkInvite() {
         setInviteLink(linkText);
