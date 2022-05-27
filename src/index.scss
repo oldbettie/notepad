@@ -16,9 +16,9 @@ body {
 	box-sizing: border-box;
 }
 button {
+	background: rgba(128, 128, 128, 0.28);
 	border: 2px solid $third;
 	color: $third;
-	background: white;
 	border-radius: 5px;
 	padding: 6px 14px;
 	font-size: 20px;
@@ -35,7 +35,7 @@ input {
 	margin: 5px 0;
 	padding: 0px 5px;
 }
-
+// this needs to be fixed tbd later
 .navContainer {
 	position: sticky;
 	top: 0;

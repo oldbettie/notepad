@@ -1,1 +1,12 @@
+.outofbounds {
+	background-color: grey;
+}
 
+.screenBackground {
+	background-color: aliceblue;
+	overflow: hidden;
+	border: 10px solid black;
+	position: relative;
+	width: 2500px;
+	height: 2500px;
+}
