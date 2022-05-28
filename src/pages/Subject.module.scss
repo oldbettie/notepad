@@ -1,15 +1,35 @@
+$primary: #ffffff;
+$secondary: #cccccc;
+$third: #444444;
+
 .outofbounds {
 	height: 100vh;
-	background-color: rgb(74, 73, 73);
+	background-color: $third;
 	overflow: hidden;
+}
+.subjectTitle {
+	text-transform: capitalize;
+	position: fixed;
+	opacity: 0;
+	z-index: 100;
+	left: 130px;
+	top: 22px;
+	font-size: 24px;
+	color: $third;
 }
 
 .screenBackground {
 	background-image: url("../images/background.jpg");
 	background-size: 2800px;
 	transform: rotate(90deg);
-	border: 10px solid black;
 	position: relative;
 	width: 2800px;
 	height: 1400px;
+	padding: 1em;
+}
+
+@media (min-width: 500px) {
+	.subjectTitle {
+		opacity: 1;
+	}
 }

@@ -5,10 +5,10 @@ import { useGesture } from "react-use-gesture";
 import NewNote from "../components/NewNote";
 import Note from "../components/Note";
 import styles from "./Subject.module.scss";
+import Users from "../components/Users";
 
 function Subject() {
 	let imageRef = useRef();
-	let containerRef = useRef();
 	let params = useParams();
 	const nav = useNavigate();
 	const data = localStorage.getItem("userData");
@@ -19,13 +19,13 @@ function Subject() {
 	let [crop, setCrop] = useState({ x: 0, y: 0, scale: 1 });
 	const [mouse, setMouse] = useState("crosshair");
 	const [noteTrue, setNoteTrue] = useState(false);
+	const [color, setColor] = useState("#ffff88");
 
 	// controls the overall board movement and zoom
 	useGesture(
 		{
 			onDrag: ({ movement: [dx, dy] }) => {
 				setCrop((crop) => ({ ...crop, x: dx, y: dy }));
-				let containerBounds = containerRef.current.getBoundingClientRect();
 			},
 			onPinch: ({ memo, origin: [pinchOriginX, pinchOriginY], offset: [d] }) => {
 				memo ??= {
@@ -86,6 +86,7 @@ function Subject() {
 		// }, 6000);
 	}
 
+	// controls the zoom icon
 	useEffect(() => {
 		document.addEventListener("keydown", (e) => {
 			e.ctrlKey && setMouse("zoom-in");
@@ -107,7 +108,13 @@ function Subject() {
 		getSubject();
 	}, []);
 	return (
-		<div className={styles.outofbounds} ref={containerRef}>
+		<div className={styles.outofbounds}>
+			<Users color={color} />
+			{subject !== null ? (
+				<h1 className={styles.subjectTitle}>Board: {subject.title}</h1>
+			) : (
+				""
+			)}
 			<div
 				className={styles.screenBackground}
 				ref={imageRef}
@@ -122,7 +129,6 @@ function Subject() {
 				}}>
 				{subject !== null ? (
 					<div>
-						<h1>{subject.title}</h1>
 						{noteTrue ? (
 							<div>
 								{/*  */}
@@ -146,7 +152,8 @@ function Subject() {
 					"Loading..."
 				)}
 			</div>
-			<NewNote />
+
+			<NewNote passedColor={(value) => setColor(value)} />
 		</div>
 	);
 }

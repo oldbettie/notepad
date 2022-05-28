@@ -17,9 +17,7 @@ body {
 	height: 100vh;
 }
 button {
-	background: rgba(128, 128, 128, 0.28);
-	border: 2px solid $third;
-	color: $third;
+	background: none;
 	border-radius: 5px;
 	padding: 6px 14px;
 	font-size: 20px;
@@ -27,8 +25,22 @@ button {
 }
 button:hover {
 	cursor: pointer;
-	color: #444444;
-	border: 2px solid #444444;
+	color: #998484;
+	border: 2px solid #998484;
+}
+.btnHome {
+	border: none;
+	font-size: 40px;
+	padding: 15px 20px;
+	margin: 0;
+}
+.btnLogin {
+	margin: 15px 10px;
+	padding: 10px 10px;
+	background: $primary;
+}
+.btnHome:hover {
+	border: none;
 }
 input {
 	border: 1px solid $third;

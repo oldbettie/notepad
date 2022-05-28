@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import { getUserAuth } from "../helpers";
 import styles from "./Login.module.scss";
@@ -74,7 +74,12 @@ function Login() {
 				<Button content="Sign in" />
 				{error && <h4>{error}</h4>}
 			</form>
-			{loginStatus && <button onClick={getUserAuth}>Check Auth</button>}
+			<div className={styles.signupContainer}>
+				<h4>Not a member?? sign up today!! </h4>
+				<NavLink to={"/signup"}>
+					<Button content="Sign Up" classnames="btn btnNav btnLogin" />
+				</NavLink>
+			</div>
 		</div>
 	);
 }

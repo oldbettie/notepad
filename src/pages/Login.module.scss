@@ -15,4 +15,13 @@ $third: #444444;
 		margin: 5px 0;
 		padding: 0px 5px;
 	}
+	button {
+		margin: 20px 0;
+		width: 100%;
+	}
+}
+.signupContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }

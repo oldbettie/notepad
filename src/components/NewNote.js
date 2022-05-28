@@ -4,12 +4,14 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import Button from "../components/Button";
 import styles from "./NewNote.module.scss";
+import ColorPicker from "./ColorPicker";
 
-function NewNote() {
+function NewNote({ passedColor }) {
 	const URL = process.env.REACT_APP_URL;
 	let params = useParams();
 	const { user, setUser } = useContext(UserContext);
 	const [note, setNote] = useState(null);
+	const [color, setColor] = useState("#ffff88");
 
 	function submitNote(e) {
 		const data = localStorage.getItem("userData");
@@ -38,22 +40,29 @@ function NewNote() {
 			});
 	}
 
+	function passColor(hash) {
+		setColor(hash);
+		passedColor(hash);
+	}
 	return (
-		<div className={styles.noteContainer}>
-			<form onSubmit={submitNote}>
-				<h5>{user && user.userName}</h5>
-				{note && <Button content="+" classnames={styles.noteBtn} />}
+		<div>
+			<ColorPicker getColor={(value) => passColor(value)} color={color} />
+			<div className={styles.noteContainer} style={{ backgroundColor: color }}>
+				<form onSubmit={submitNote}>
+					<h5>{user && user.userName}</h5>
+					{note && <Button content="+" classnames={styles.noteBtn} />}
 
-				<textarea
-					className={styles.textarea}
-					type="textarea"
-					placeholder="content..."
-					value={note || ""}
-					onChange={(e) => {
-						setNote(e.target.value);
-					}}
-				/>
-			</form>
+					<textarea
+						className={styles.textarea}
+						type="textarea"
+						placeholder="content..."
+						value={note || ""}
+						onChange={(e) => {
+							setNote(e.target.value);
+						}}
+					/>
+				</form>
+			</div>
 		</div>
 	);
 }

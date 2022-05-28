@@ -1,0 +1,23 @@
+$primary: #ffffff;
+$secondary: #cccccc;
+$third: #444444;
+$postit: #ffff88;
+
+.pickerContainer {
+	position: fixed;
+	bottom: 190px;
+	right: 15px;
+	height: 40px;
+	color: $postit;
+	font-size: 35px;
+	background-color: #ffffff9e;
+	border-radius: 20px;
+	transition: 0.2s;
+	.contentContainer {
+		position: fixed;
+		right: 16px;
+		bottom: 184px;
+		transition: 0.4s;
+		cursor: pointer;
+	}
+}

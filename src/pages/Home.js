@@ -18,7 +18,8 @@ function Home() {
 
 	return (
 		<div>
-			<h3>Welcome back: {status ? email : ""}</h3>
+			{status ? <h3>Welcome back: {email}</h3> : ""}
+
 			<div className={styles.logoContainer}>
 				<div className={styles.postit}>
 					<h1 className={styles.logo}>TEAM NOTES</h1>

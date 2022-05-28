@@ -1,4 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
+import { GrHome } from "react-icons/gr";
+import { CgProfile } from "react-icons/cg";
+import { VscSignOut } from "react-icons/vsc";
 import { NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import Button from "./Button";
@@ -47,37 +50,44 @@ function NavBar() {
 			}>
 			<div>
 				<div className="navDefault">
-					<NavLink to={"/"}>
-						<Button content="Home" classnames="btn btnNav" />
-					</NavLink>
 					{userState ? (
 						<NavLink to={`/subjects/${user.id}`}>
-							<Button content="Subjects" classnames="btn btnNav" />
+							<Button
+								content={<GrHome />}
+								classnames="btn btnNav btnHome"
+							/>
 						</NavLink>
 					) : (
-						""
+						<NavLink to={"/"}>
+							<Button
+								content={<GrHome />}
+								classnames="btn btnNav btnHome"
+							/>
+						</NavLink>
 					)}
 				</div>
 
 				{!userState ? (
 					<div className="navUser">
 						<NavLink to={"/login"}>
-							<Button content="Login" classnames="btn btnNav" />
-						</NavLink>
-						<NavLink to={"/signup"}>
-							<Button content="Sign Up" classnames="btn btnNav" />
+							<Button content="Login" classnames="btn btnNav btnLogin" />
 						</NavLink>
 					</div>
 				) : (
 					<div className="navUser">
 						<NavLink to={`/user/${user.id}`}>
-							<Button content="Profile" classnames="btn btnNav" />
+							<Button
+								content={<CgProfile />}
+								classnames="btn btnNav btnHome"
+							/>
 						</NavLink>
-						<Button
-							content="Sign Out"
-							classnames="btn btnNav"
-							onClick={logout}
-						/>
+						<NavLink to={"/"}>
+							<Button
+								content={<VscSignOut />}
+								classnames="btn btnNav btnHome"
+								onClick={logout}
+							/>
+						</NavLink>
 					</div>
 				)}
 			</div>
