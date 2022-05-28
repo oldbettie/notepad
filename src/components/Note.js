@@ -1,38 +1,66 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { UserContext } from "../UserContext";
-import { useDrag, useGesture } from "react-use-gesture";
+import { useGesture } from "react-use-gesture";
 import axios from "axios";
 import styles from "./Note.module.scss";
 import Button from "./Button";
 
-function Note({ content }) {
-	let imageRef = useRef();
+function Note({ content, scale, load, keyID }) {
+	let noteRef = useRef();
 	const { user, setUser } = useContext(UserContext);
-	let [crop, setCrop] = useState({ x: content.x_axis, y: content.y_axis });
+	let [noteCrop, setNoteCrop] = useState({ x: content.x_axis, y: content.y_axis });
+	const [mouse, setMouse] = useState("grab");
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
 	const URL = process.env.REACT_APP_URL;
 
+	// all the logic for controlling each note individually
 	useGesture(
 		{
-			onDrag: ({ event, offset: [dx, dy] }) => {
+			onDrag: ({ event, movement: [dx, dy] }) => {
+				const xCSS = 2550; //250px less then the css
+				const yCSS = 1150; //250px less then the css
 				event.stopPropagation();
-				setCrop({ x: dx, y: dy });
+				if (dx <= 0 && dy <= 0) {
+					setNoteCrop({ x: 0, y: 0 });
+				} else if (dx >= xCSS * scale && dy <= 0) {
+					setNoteCrop({ x: xCSS, y: 0 });
+				} else if (dx >= xCSS * scale && dy >= yCSS * scale) {
+					setNoteCrop({ x: xCSS, y: yCSS });
+				} else if (dx <= 0 && dy >= yCSS * scale) {
+					setNoteCrop({ x: 0, y: yCSS });
+				} else if (dx < 0) {
+					setNoteCrop({ x: 0, y: dy / scale });
+				} else if (dy < 0) {
+					setNoteCrop({ x: dx / scale, y: 0 });
+				} else if (dy >= yCSS * scale) {
+					setNoteCrop({ x: dx / scale, y: yCSS });
+				} else if (dx >= xCSS * scale) {
+					setNoteCrop({ x: xCSS, y: dy / scale });
+				} else {
+					setNoteCrop({ x: dx / scale, y: dy / scale });
+				}
 			},
 		},
 		{
-			domTarget: imageRef,
+			drag: {
+				initial: () => [noteCrop.x * scale, noteCrop.y * scale],
+			},
+			domTarget: noteRef,
 			eventOptions: { passive: false },
+			preventDefault: true,
 		}
 	);
 
+	// updates the location on the subject board
 	function updateLocation() {
+		setMouse("grab");
 		axios
 			.put(
 				`${URL}note/${content.id}`,
 				{
-					x_axis: crop.x,
-					y_axis: crop.y,
+					x_axis: noteCrop.x,
+					y_axis: noteCrop.y,
 				},
 				{
 					headers: {
@@ -58,30 +86,45 @@ function Note({ content }) {
 			})
 			.catch((err) => {});
 	}
+	function mouseDown() {
+		setMouse("grabbing");
+	}
+	useEffect(() => {
+		document.addEventListener("keydown", (e) => {
+			e.ctrlKey && setMouse("zoom-in");
+		});
+		document.addEventListener("keyup", (e) => {
+			!e.ctrlKey && setMouse("grab");
+		});
+	}, []);
 
-	return (
-		<div
-			key={content.id}
-			className={styles.noteContainer}
-			ref={imageRef}
-			style={{
-				left: crop.x,
-				position: "absolute",
-				top: crop.y,
-				touchAction: "none",
-			}}
-			onMouseUp={updateLocation}>
-			{content.userId === user.id && (
-				<Button
-					content="-"
-					classnames={styles.noteBtn}
-					onClick={() => deleteNote(content.id)}
-				/>
-			)}
-			<h6 className={styles.userName}>{content.user.userName}</h6>
-			<p className={styles.textarea}>{content.note_text}</p>
-		</div>
-	);
+	if (load) {
+		return (
+			<div
+				key={keyID}
+				className={styles.noteContainer}
+				ref={noteRef}
+				style={{
+					left: noteCrop.x,
+					position: "absolute",
+					top: noteCrop.y,
+					touchAction: "none",
+					cursor: mouse,
+				}}
+				onMouseDown={mouseDown}
+				onMouseUp={updateLocation}>
+				{content.userId === user.id && (
+					<Button
+						content="-"
+						classnames={styles.noteBtn}
+						onClick={() => deleteNote(content.id)}
+					/>
+				)}
+				<h6 className={styles.userName}>{content.user.userName}</h6>
+				<p className={styles.textarea}>{content.note_text}</p>
+			</div>
+		);
+	}
 }
 
 export default Note;

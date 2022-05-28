@@ -8,6 +8,7 @@ import styles from "./Subject.module.scss";
 
 function Subject() {
 	let imageRef = useRef();
+	let containerRef = useRef();
 	let params = useParams();
 	const nav = useNavigate();
 	const data = localStorage.getItem("userData");
@@ -16,17 +17,47 @@ function Subject() {
 	const [notes, setNotes] = useState([]);
 	const [error, setError] = useState(null);
 	let [crop, setCrop] = useState({ x: 0, y: 0, scale: 1 });
+	const [mouse, setMouse] = useState("crosshair");
+	const [noteTrue, setNoteTrue] = useState(false);
 
+	// controls the overall board movement and zoom
 	useGesture(
 		{
-			onDrag: ({ offset: [dx, dy] }) => {
+			onDrag: ({ movement: [dx, dy] }) => {
 				setCrop((crop) => ({ ...crop, x: dx, y: dy }));
+				let containerBounds = containerRef.current.getBoundingClientRect();
 			},
-			onPinch: ({ offset: [d] }) => {
-				setCrop((crop) => ({ ...crop, scale: 1 + d / 20000 }));
+			onPinch: ({ memo, origin: [pinchOriginX, pinchOriginY], offset: [d] }) => {
+				memo ??= {
+					bounds: imageRef.current.getBoundingClientRect(),
+					crop,
+				};
+
+				let transformOriginX = memo.bounds.x + memo.bounds.width / 2;
+				let transformOriginY = memo.bounds.y + memo.bounds.height / 2;
+
+				let displacementX = (transformOriginX - pinchOriginX) / memo.crop.scale;
+				let displacementY = (transformOriginY - pinchOriginY) / memo.crop.scale;
+
+				let initialOffsetDistance = (memo.crop.scale - 1) * 20000;
+				let movementDistance = d - initialOffsetDistance;
+
+				setCrop((crop) => ({
+					...crop,
+					scale: 1 + d / 20000,
+					x: memo.crop.x + (displacementX * movementDistance) / 20000,
+					y: memo.crop.y + (displacementY * movementDistance) / 20000,
+				}));
+				return memo;
 			},
 		},
 		{
+			drag: {
+				initial: () => [crop.x, crop.y],
+			},
+			pinch: {
+				distanceBounds: { min: -8000 },
+			},
 			domTarget: imageRef,
 			eventOptions: { passive: false },
 		}
@@ -47,42 +78,69 @@ function Subject() {
 			.get(`${URL}notes/${subject.id}`)
 			.then((res) => {
 				setNotes(res.data);
+				setNoteTrue(true);
 			})
 			.catch((err) => setError(err));
+		// setTimeout(() => {
+		// 	getNotes();
+		// }, 6000);
 	}
 
+	useEffect(() => {
+		document.addEventListener("keydown", (e) => {
+			e.ctrlKey && setMouse("zoom-in");
+		});
+		document.addEventListener("keyup", (e) => {
+			!e.ctrlKey && setMouse("crosshair");
+		});
+	}, []);
+
+	// runs once subject has returned
 	useEffect(() => {
 		if (subject !== null) {
 			getNotes();
 		}
 	}, [subject]);
 
+	// runs first to get the subject
 	useEffect(() => {
 		getSubject();
 	}, []);
 	return (
-		<div className={styles.outofbounds}>
+		<div className={styles.outofbounds} ref={containerRef}>
 			<div
 				className={styles.screenBackground}
 				ref={imageRef}
+				onMouseDown={() => setMouse("grabbing")}
+				onMouseUp={() => setMouse("crosshair")}
 				style={{
 					left: crop.x,
 					top: crop.y,
 					touchAction: "none",
 					transform: `scale(${crop.scale})`,
+					cursor: mouse,
 				}}>
 				{subject !== null ? (
 					<div>
 						<h1>{subject.title}</h1>
-						<div>
-							{/*  */}
-							{/*  */}
-							{notes.map((note) => {
-								return <Note content={note} />;
-							})}
-							{/*  */}
-							{/*  */}
-						</div>
+						{noteTrue ? (
+							<div>
+								{/*  */}
+								{notes.map((note) => {
+									return (
+										<Note
+											content={note}
+											scale={crop.scale}
+											load={noteTrue}
+											keyID={note.id}
+										/>
+									);
+								})}
+								{/*  */}
+							</div>
+						) : (
+							<h3>Loading Notes...</h3>
+						)}
 					</div>
 				) : (
 					"Loading..."

@@ -7,6 +7,15 @@ function NavBar() {
 	const nav = useNavigate();
 	const { user, setUser } = useContext(UserContext);
 	const [userState, setUserState] = useState(false);
+	const [navState, setNavState] = useState(false);
+
+	useEffect(() => {
+		if (window.location.href.includes("/subject/")) {
+			setNavState(true);
+		} else {
+			setNavState(false);
+		}
+	}, [window.location.href]);
 
 	function logout() {
 		localStorage.removeItem("userData");
@@ -24,7 +33,18 @@ function NavBar() {
 	}, [user]);
 
 	return (
-		<div className="navContainer">
+		<div
+			className="navContainer"
+			style={
+				navState
+					? {
+							position: "fixed",
+							background: "white",
+							opacity: "0.8",
+							width: "100%",
+					  }
+					: { position: "sticky" }
+			}>
 			<div>
 				<div className="navDefault">
 					<NavLink to={"/"}>

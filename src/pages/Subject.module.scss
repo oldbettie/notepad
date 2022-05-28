@@ -1,12 +1,15 @@
 .outofbounds {
-	background-color: grey;
+	height: 100vh;
+	background-color: rgb(74, 73, 73);
+	overflow: hidden;
 }
 
 .screenBackground {
-	background-color: aliceblue;
-	overflow: hidden;
+	background-image: url("../images/background.jpg");
+	background-size: 2800px;
+	transform: rotate(90deg);
 	border: 10px solid black;
 	position: relative;
-	width: 2500px;
-	height: 2500px;
+	width: 2800px;
+	height: 1400px;
 }
