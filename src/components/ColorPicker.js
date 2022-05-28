@@ -30,7 +30,7 @@ function ColorPicker({ getColor, color }) {
 					/>
 					<BsPaintBucket
 						style={{ color: "#ADD8E6" }}
-						onClick={() => updateColor("#ADD8E6")}
+						onClick={() => updateColor("#0096FF")}
 					/>
 					<BsPaintBucket
 						style={{ color: "#00FF00" }}
