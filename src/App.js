@@ -8,6 +8,7 @@ import axios from "axios";
 //  come back for auth provider stuff later
 function App() {
 	const URL = process.env.REACT_APP_URL;
+	//const URL = "http://localhost:3000/isAuth";
 	const [user, setUser] = useState(null);
 	const data = localStorage.getItem("userData");
 
@@ -17,6 +18,7 @@ function App() {
 		axios
 			.post(
 				`${URL}isAuth`,
+				//URL,
 				{ id: userId },
 				{
 					headers: {
