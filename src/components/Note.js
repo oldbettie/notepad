@@ -23,28 +23,20 @@ function Note({ content, scale, load, keyID }) {
 				event.stopPropagation();
 				if (dx <= 0 && dy <= 0) {
 					setNoteCrop({ x: 0, y: 0 });
-					console.log("first");
 				} else if (dx >= xCSS * scale && dy <= 0) {
 					setNoteCrop({ x: xCSS, y: 0 });
-					console.log("second");
 				} else if (dx >= xCSS * scale && dy >= yCSS * scale) {
 					setNoteCrop({ x: xCSS, y: yCSS });
-					console.log("third");
 				} else if (dx <= 0 && dy >= yCSS * scale) {
 					setNoteCrop({ x: 0, y: yCSS });
-					console.log("fourth");
 				} else if (dx < 0) {
 					setNoteCrop({ x: 0, y: dy / scale });
-					console.log("fifth");
 				} else if (dy < 0) {
 					setNoteCrop({ x: dx / scale, y: 0 });
-					console.log("sixth");
 				} else if (dy >= yCSS * scale) {
 					setNoteCrop({ x: dx / scale, y: yCSS });
-					console.log("seventh");
 				} else if (dx >= xCSS * scale) {
 					setNoteCrop({ x: xCSS, y: dy / scale });
-					console.log("eight");
 				} else {
 					setNoteCrop({ x: dx / scale, y: dy / scale });
 				}
@@ -102,7 +94,7 @@ function Note({ content, scale, load, keyID }) {
 			e.ctrlKey && setMouse("zoom-in");
 		});
 		document.addEventListener("keyup", (e) => {
-			!e.ctrlKey && setMouse("crosshair");
+			!e.ctrlKey && setMouse("grab");
 		});
 	}, []);
 
