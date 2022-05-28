@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 function InviteButton(props) {
-	const URL = 'localhost:3001';
+	const URL = process.env.REACT_APP_URL;
     const [createInvite, setCreateInvite] = useState(true);
     const [inviteLink, setInviteLink] = useState(''); 
     const linkText = `${URL}/subject/${props.subjectId}`;

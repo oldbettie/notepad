@@ -26,6 +26,7 @@ function Subject({ subject }) {
 		<div key={subject.id} className={styles.subjectsContainer}>
 			{edit ? (
 				<div>
+					{subject.title}
 					<NavLink to={`/subject/${subject.id}`}>
 						<Button content="Join" />
 					</NavLink>
