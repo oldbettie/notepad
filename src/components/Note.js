@@ -1,14 +1,15 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import { useGesture } from "react-use-gesture";
 import axios from "axios";
 import styles from "./Note.module.scss";
 import Button from "./Button";
 
-function Note({ content, scale }) {
+function Note({ content, scale, load, keyID }) {
 	let noteRef = useRef();
 	const { user, setUser } = useContext(UserContext);
 	let [noteCrop, setNoteCrop] = useState({ x: content.x_axis, y: content.y_axis });
+	const [mouse, setMouse] = useState("grab");
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
 	const URL = process.env.REACT_APP_URL;
@@ -61,6 +62,7 @@ function Note({ content, scale }) {
 
 	// updates the location on the subject board
 	function updateLocation() {
+		setMouse("grab");
 		axios
 			.put(
 				`${URL}note/${content.id}`,
@@ -92,33 +94,45 @@ function Note({ content, scale }) {
 			})
 			.catch((err) => {});
 	}
+	function mouseDown() {
+		setMouse("grabbing");
+	}
+	useEffect(() => {
+		document.addEventListener("keydown", (e) => {
+			e.ctrlKey && setMouse("zoom-in");
+		});
+		document.addEventListener("keyup", (e) => {
+			!e.ctrlKey && setMouse("crosshair");
+		});
+	}, []);
 
-	return (
-		<div
-			key={content.id}
-			className={styles.noteContainer}
-			ref={noteRef}
-			style={{
-				left: noteCrop.x,
-				position: "absolute",
-				top: noteCrop.y,
-				touchAction: "none",
-			}}
-			onMouseUp={updateLocation}>
-			{content.userId === user.id && (
-				<Button
-					content="-"
-					classnames={styles.noteBtn}
-					onClick={() => deleteNote(content.id)}
-				/>
-			)}
-			<h6 className={styles.userName}>{content.user.userName}</h6>
-			<p className={styles.textarea}>{content.note_text}</p>
-			{/* <p>{Math.round(noteCrop.x)} X</p>
-			<p>{Math.round(noteCrop.y)} Y</p>
-			<p>{scale}</p> */}
-		</div>
-	);
+	if (load) {
+		return (
+			<div
+				key={keyID}
+				className={styles.noteContainer}
+				ref={noteRef}
+				style={{
+					left: noteCrop.x,
+					position: "absolute",
+					top: noteCrop.y,
+					touchAction: "none",
+					cursor: mouse,
+				}}
+				onMouseDown={mouseDown}
+				onMouseUp={updateLocation}>
+				{content.userId === user.id && (
+					<Button
+						content="-"
+						classnames={styles.noteBtn}
+						onClick={() => deleteNote(content.id)}
+					/>
+				)}
+				<h6 className={styles.userName}>{content.user.userName}</h6>
+				<p className={styles.textarea}>{content.note_text}</p>
+			</div>
+		);
+	}
 }
 
 export default Note;

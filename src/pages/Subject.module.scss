@@ -5,7 +5,9 @@
 }
 
 .screenBackground {
-	background-color: aliceblue;
+	background-image: url("../images/background.jpg");
+	background-size: 2800px;
+	transform: rotate(90deg);
 	border: 10px solid black;
 	position: relative;
 	width: 2800px;
