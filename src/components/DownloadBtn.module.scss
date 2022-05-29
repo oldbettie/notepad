@@ -1,0 +1,19 @@
+$primary: #ffffffc9;
+$secondary: #cccccc;
+$third: #444444;
+
+.download {
+	position: fixed;
+	background: $primary;
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 120;
+	top: 129px;
+	left: 15px;
+	font-size: 30px;
+	cursor: pointer;
+}

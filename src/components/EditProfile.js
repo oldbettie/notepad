@@ -12,29 +12,47 @@ function EditProfile() {
 	const [userName, setUserName] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setlastName] = useState("");
+	const [color, setColor] = useState("#ffff88");
+	const [error, setError] = useState("");
 
 	function updateUser(e) {
-		const data = localStorage.getItem("userData");
-		const token = JSON.parse(data).token;
 		e.preventDefault();
-		axios
-			.put(
-				`${URL}users/${params.id}`,
-				{
-					id: params.id,
-					firstName: firstName,
-					lastName: lastName,
-					userName: userName,
-				},
-				{
-					headers: {
-						"x-access-token": token,
+		if (checkColorCode(color)) {
+			const data = localStorage.getItem("userData");
+			const token = JSON.parse(data).token;
+			axios
+				.put(
+					`${URL}users/${params.id}`,
+					{
+						id: params.id,
+						firstName: firstName,
+						lastName: lastName,
+						userName: userName,
+						color: color,
 					},
-				}
-			)
-			.then((res) => {
-				window.location.reload();
-			});
+					{
+						headers: {
+							"x-access-token": token,
+						},
+					}
+				)
+				.then((res) => {
+					setError("");
+					window.location.reload();
+				});
+		} else {
+			setError("code not accepted");
+		}
+	}
+
+	function checkColorCode(str) {
+		const regexHex = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
+		if (str === "") {
+			return false;
+		}
+		if (str.match(regexHex)) {
+			return true;
+		} else return false;
 	}
 
 	useEffect(() => {
@@ -78,8 +96,17 @@ function EditProfile() {
 							setUserName(event.target.value);
 						}}
 					/>
+					<input
+						placeholder="set Custom color must be real hexcode"
+						type="text"
+						value={color || ""}
+						onChange={(event) => {
+							setColor(event.target.value);
+						}}
+					/>
 					<Button content="Update" />
 				</form>
+				<h4>{error}</h4>
 			</div>
 		)
 	);

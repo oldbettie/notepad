@@ -105,6 +105,7 @@ function Note({ content, scale, load, keyID }) {
 				className={styles.noteContainer}
 				ref={noteRef}
 				style={{
+					backgroundColor: content.color || "#ffff88",
 					left: noteCrop.x,
 					position: "absolute",
 					top: noteCrop.y,

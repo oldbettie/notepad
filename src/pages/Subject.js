@@ -1,16 +1,20 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../UserContext";
 import axios from "axios";
 import { useGesture } from "react-use-gesture";
 import NewNote from "../components/NewNote";
 import Note from "../components/Note";
 import styles from "./Subject.module.scss";
 import Users from "../components/Users";
+import DownloadBtn from "../components/DownloadBtn";
 
 function Subject() {
 	let imageRef = useRef();
 	let params = useParams();
 	const nav = useNavigate();
+	const { user, setUser } = useContext(UserContext);
+
 	const data = localStorage.getItem("userData");
 	const URL = process.env.REACT_APP_URL;
 	const [subject, setSubject] = useState(null);
@@ -81,10 +85,16 @@ function Subject() {
 				setNoteTrue(true);
 			})
 			.catch((err) => setError(err));
-		// setTimeout(() => {
-		// 	getNotes();
-		// }, 6000);
+		setTimeout(() => {
+			getNotes();
+		}, 15000);
 	}
+
+	useEffect(() => {
+		if (user) {
+			setColor(user.color);
+		}
+	}, [user]);
 
 	// controls the zoom icon
 	useEffect(() => {
@@ -115,6 +125,7 @@ function Subject() {
 			) : (
 				""
 			)}
+			<DownloadBtn color={color} />
 			<div
 				className={styles.screenBackground}
 				ref={imageRef}
