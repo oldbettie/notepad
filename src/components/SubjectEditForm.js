@@ -18,7 +18,7 @@ function SubjectEditForm({id}) {
 		e.preventDefault();
 		axios
 			.put(
-				`${URL}/subject/${id}`,
+				`${URL}subject/${id}`,
 				{
 					title,
 				},

@@ -5,6 +5,7 @@ import axios from "axios";
 import SubjectForm from "../components/SubjectForm";
 import Button from "../components/Button";
 import Subject from "../components/Subject";
+import SubjectParticipant from "../components/SubjectParticipant";
 import SubjectEditForm from "../components/SubjectEditForm";
 
 function Subjects() {
@@ -14,7 +15,9 @@ function Subjects() {
 	const [newSubject, setNewSubject] = useState(true);
 	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
 	const URL = process.env.REACT_APP_URL;
+	const [participation, setParticipation] = useState(['Currently not participating in other subjects']);
 	const [directTo, setDirectTo] = useState([""]);
+	
 
 	function writeSubject() {
 		setNewSubject(!newSubject);
@@ -25,6 +28,7 @@ function Subjects() {
 			setStatus(user.auth);
 			if (user.auth) {
 				setNewSubject(true);
+				getAllSubjects();
 			}
 		} else {
 			setStatus(false);
@@ -40,6 +44,28 @@ function Subjects() {
 	useEffect(() => {
 		getSubjects();
 	}, [status]);
+
+	//gets all subjects and looks for the user participation. Adds those to participation state as an []
+	function getAllSubjects() {
+		const userSubjects = [];
+		let thisUser = params.id;
+		axios.get(`${URL}subjects/all`).then((res) => {
+			return res.data;
+		})
+		.then((allSubjects) => {
+			for(let i=0; i < allSubjects.length; i++) {
+				if(allSubjects[i].users.length > 0) {
+					for(let j=0; j < allSubjects[i].users.length; j++) {
+						let subjectUserId = allSubjects[i].users[j].id;
+						if(subjectUserId == thisUser ) {
+							userSubjects.push(allSubjects[i]);
+						}
+					}
+				}
+			}
+			setParticipation(userSubjects);
+		})
+	}
 
 	return (
 		<div>
@@ -57,6 +83,12 @@ function Subjects() {
 				<h3>Created subjects</h3>
 				{ownSubjects.map((subject) => {
 					return <Subject subject={subject} />;
+				})}
+			</div>
+			<div>
+				<h3>Subjects you are part of</h3>
+				{participation.map((subject) => {
+					return <SubjectParticipant subject={subject} />;
 				})}
 			</div>
 		</div>
