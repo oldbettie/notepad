@@ -7,16 +7,41 @@ $postit: #ffff88;
 	position: fixed;
 	top: 90px;
 	right: 15px;
-	font-size: 30px;
+	font-size: 28px;
 	background-color: #ffffffc9;
 	border-radius: 20px;
 	transition: 0.2s;
 	z-index: 101;
+
 	.userContentContainer {
 		position: fixed;
-		right: 20px;
+		right: 21px;
 		top: 95px;
 		transition: 0.4s;
 		cursor: pointer;
+	}
+}
+
+.userContentContainerOpen {
+	position: fixed;
+	right: 21px;
+	top: 95px;
+	width: 170px;
+	transition: 0.4s;
+	padding: 0;
+	cursor: pointer;
+	.allUsersContainer {
+		width: 100%;
+		.currentUser {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.usersBox {
+			z-index: 105;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 	}
 }

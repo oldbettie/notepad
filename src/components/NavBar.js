@@ -46,7 +46,7 @@ function NavBar() {
 							opacity: "0.8",
 							width: "100%",
 					  }
-					: { position: "sticky" }
+					: { position: "relative" }
 			}>
 			<div>
 				<div className="navDefault">

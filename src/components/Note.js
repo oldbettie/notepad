@@ -18,8 +18,8 @@ function Note({ content, scale, load, keyID }) {
 	useGesture(
 		{
 			onDrag: ({ event, movement: [dx, dy] }) => {
-				const xCSS = 2550; //250px less then the css
-				const yCSS = 1150; //250px less then the css
+				const xCSS = 2950; //250px less then the css
+				const yCSS = 1450; //250px less then the css
 				event.stopPropagation();
 				if (dx <= 0 && dy <= 0) {
 					setNoteCrop({ x: 0, y: 0 });

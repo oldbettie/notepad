@@ -56,7 +56,7 @@ function Subject() {
 				initial: () => [crop.x, crop.y],
 			},
 			pinch: {
-				distanceBounds: { min: -8000 },
+				distanceBounds: { min: -10000 },
 			},
 			domTarget: imageRef,
 			eventOptions: { passive: false },
