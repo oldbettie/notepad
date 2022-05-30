@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiUsers } from "react-icons/fi";
 import styles from "./Users.module.scss";
 
-function Users({ color }) {
+function Users() {
 	const [open, setOpen] = useState(false);
 	const [userCount, setUserCount] = useState(0);
 	const [users, setUsers] = useState([
@@ -24,13 +24,13 @@ function Users({ color }) {
 					: { width: "180px", height: `${40 * userCount + 5}px` }
 			}>
 			{!open ? (
-				<div className={styles.userContentContainer} style={{ color: color }}>
+				<div className={styles.userContentContainer}>
 					<FiUsers />
 				</div>
 			) : (
 				<div
 					className={styles.userContentContainerOpen}
-					style={{ color: color, height: `${40 * userCount}px` }}>
+					style={{ height: `${40 * userCount}px` }}>
 					<div className={styles.allUsersContainer}>
 						<div className={styles.currentUser}>
 							<h6>oldbettie</h6>

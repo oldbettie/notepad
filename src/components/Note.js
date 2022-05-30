@@ -1,6 +1,9 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import { useGesture } from "react-use-gesture";
+import { AiFillMinusCircle, AiOutlineDelete } from "react-icons/ai";
+import { BiPencil } from "react-icons/bi";
+import { BsSticky } from "react-icons/bs";
 import axios from "axios";
 import styles from "./Note.module.scss";
 import Button from "./Button";
@@ -13,6 +16,8 @@ function Note({ content, scale, load, keyID }) {
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
 	const URL = process.env.REACT_APP_URL;
+	const [editState, setEditState] = useState(false);
+	const [text, setText] = useState(content.note_text);
 
 	// all the logic for controlling each note individually
 	useGesture(
@@ -74,6 +79,27 @@ function Note({ content, scale, load, keyID }) {
 			});
 	}
 
+	function editNote(e) {
+		e.preventDefault();
+		axios
+			.put(
+				`${URL}note/${content.id}`,
+				{
+					note_text: text,
+				},
+				{
+					headers: {
+						"x-access-token": token,
+					},
+				}
+			)
+			.then((res) => {})
+			.catch((err) => {
+				console.log(err);
+			});
+		setEditState(!editState);
+	}
+
 	function deleteNote(id) {
 		axios
 			.delete(`${URL}note/${id}`, {
@@ -86,6 +112,11 @@ function Note({ content, scale, load, keyID }) {
 			})
 			.catch((err) => {});
 	}
+
+	function openEdit() {
+		setEditState(!editState);
+	}
+
 	function mouseDown() {
 		setMouse("grabbing");
 	}
@@ -115,14 +146,49 @@ function Note({ content, scale, load, keyID }) {
 				onMouseDown={mouseDown}
 				onMouseUp={updateLocation}>
 				{content.userId === user.id && (
-					<Button
-						content="-"
-						classnames={styles.noteBtn}
-						onClick={() => deleteNote(content.id)}
-					/>
+					<div>
+						<Button
+							style={{ color: content.color }}
+							content={<AiOutlineDelete />}
+							classnames={styles.noteBtn}
+							onClick={() => deleteNote(content.id)}
+						/>
+						{!editState ? (
+							<div>
+								<Button
+									style={{ color: content.color }}
+									content={<BiPencil />}
+									classnames={styles.noteEditBtn}
+									onClick={() => setEditState(!editState)}
+								/>
+								<p className={styles.textarea}>{text}</p>
+							</div>
+						) : (
+							""
+						)}
+					</div>
 				)}
-				<h6 className={styles.userName}>{content.user.userName}</h6>
-				<p className={styles.textarea}>{content.note_text}</p>
+				{editState ? (
+					<form onSubmit={editNote}>
+						<textarea
+							className={styles.textarea}
+							required
+							type="textarea"
+							value={text || ""}
+							onChange={(e) => {
+								setText(e.target.value);
+							}}
+						/>
+						<Button
+							style={{ color: content.color }}
+							content={<BsSticky />}
+							classnames={styles.noteEditBtn}
+						/>
+					</form>
+				) : (
+					""
+				)}
+				<h4 className={styles.userName}>{content.user.userName}</h4>
 			</div>
 		);
 	}

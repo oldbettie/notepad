@@ -1,15 +1,16 @@
-$primary: #ffffff;
+$primary: #ffffffc9;
 $secondary: #cccccc;
-$third: #444444;
+$third: #000000;
 $postit: #ffff88;
 
 .noteContainer {
 	margin: 1em;
 	height: 200px;
 	width: 200px;
-	padding: 5px;
+	padding: 5px 8px;
 	box-shadow: 7px 7px 10px #111010;
 	transform: rotate(-6deg);
+	color: black;
 	.textarea {
 		position: fixed;
 		top: 35px;
@@ -18,10 +19,40 @@ $postit: #ffff88;
 	}
 	.noteBtn {
 		position: fixed;
-		right: -5px;
-		top: -5px;
+		right: -1px;
+		top: -9px;
 		padding: 0px 8px;
+		border: none;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		opacity: 0.7;
+		font-size: 30px;
+	}
+	.noteEditBtn {
+		position: fixed;
+		right: 38px;
+		top: -8px;
+		padding: 0px 8px;
+		border: none;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		opacity: 0.7;
+		font-size: 30px;
+	}
+	.userName {
+		text-transform: capitalize;
+	}
+	.textarea {
+		resize: none;
 		background: none;
+		position: fixed;
+		bottom: 10px;
+		width: 187px;
+		height: 150px;
+		border: none;
+		font-size: 15px;
 	}
 }
 // .noteContainer:hover {

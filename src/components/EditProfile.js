@@ -12,7 +12,7 @@ function EditProfile() {
 	const [userName, setUserName] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setlastName] = useState("");
-	const [color, setColor] = useState("#ffff88");
+	const [color, setColor] = useState(user.color);
 	const [error, setError] = useState("");
 
 	function updateUser(e) {

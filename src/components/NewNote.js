@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
-import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+import { AiFillPlusCircle, AiFillMinusCircle, AiOutlineDelete } from "react-icons/ai";
+import { BsStickyFill, BsSticky } from "react-icons/bs";
 import axios from "axios";
 import Button from "../components/Button";
 import styles from "./NewNote.module.scss";
@@ -75,7 +76,7 @@ function NewNote({ passedColor }) {
 						className={styles.noteContainer}
 						style={{ backgroundColor: color }}>
 						<Button
-							content={<AiFillMinusCircle />}
+							content={<AiOutlineDelete />}
 							classnames={styles.closeNote}
 							onClick={closeNoteBox}
 						/>
@@ -83,7 +84,7 @@ function NewNote({ passedColor }) {
 							<h5>{user && user.userName}</h5>
 							{note && (
 								<Button
-									content={<AiFillPlusCircle />}
+									content={<BsSticky />}
 									classnames={styles.noteBtn}
 								/>
 							)}
@@ -105,7 +106,7 @@ function NewNote({ passedColor }) {
 					onClick={() => setNoteState(!noteState)}
 					className={styles.messageSelector}
 					style={{ backgroundColor: color }}>
-					<AiFillPlusCircle />
+					<BsStickyFill />
 				</div>
 			)}
 		</div>

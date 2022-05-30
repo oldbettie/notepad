@@ -117,15 +117,18 @@ function Subject() {
 	useEffect(() => {
 		getSubject();
 	}, []);
+
 	return (
 		<div className={styles.outofbounds}>
 			<Users color={color} />
 			{subject !== null ? (
-				<h1 className={styles.subjectTitle}>Board: {subject.title}</h1>
+				<div>
+					<h1 className={styles.subjectTitle}>Board: {subject.title}</h1>
+					<DownloadBtn color={color} notes={notes} title={subject.title} />
+				</div>
 			) : (
 				""
 			)}
-			<DownloadBtn color={color} />
 			<div
 				className={styles.screenBackground}
 				ref={imageRef}
