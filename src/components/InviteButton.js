@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
-import { v4 as uuidv4 } from 'uuid';
 
 
 function InviteButton(props) {
 	const URL = process.env.REACT_APP_URL;
+    const URLFRONT = 'localhost:3001/';
     const [createInvite, setCreateInvite] = useState(true);
     const [inviteLink, setInviteLink] = useState('');
-    const linkText = `${URL}/subject/${props.subjectId}`;
+    const subId = props.subjectId
+    const linkText = `${URLFRONT}subject/${subId}`;
     const [copyInvite, setCopyInvite] = useState('Copy Invite');
     
     function createLinkInvite() {
@@ -17,7 +18,6 @@ function InviteButton(props) {
 
     const copyTextToClipboard = async () => {
         await navigator.clipboard.writeText(inviteLink);
-        console.log('Text copied');
         setCopyInvite('Copied to clipboard!');
         setTimeout(()=> setCopyInvite('Copy Invite'), 2000);
     }

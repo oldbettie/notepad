@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import Button from "./Button";

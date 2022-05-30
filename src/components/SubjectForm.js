@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../UserContext";
 import { useParams } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 function SubjectForm() {
 	let params = useParams();
@@ -14,6 +15,8 @@ function SubjectForm() {
 	const [title, setTitle] = useState("");
 
 	function createSubject(e) {
+		let newId = uuidv4();
+		console.log(newId);
 		e.preventDefault();
 		axios
 			.post(

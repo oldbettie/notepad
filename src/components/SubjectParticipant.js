@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import Button from "./Button";
 import styles from "../pages/Subjects.module.scss";
 
