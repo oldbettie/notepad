@@ -83,11 +83,11 @@ function Subject() {
 			.then((res) => {
 				setNotes(res.data);
 				setNoteTrue(true);
-				setTimeout(() => {
-					getNotes();
-				}, 15000);
 			})
 			.catch((err) => setError(err));
+		setTimeout(() => {
+			getNotes();
+		}, 10000);
 	}
 
 	useEffect(() => {
@@ -152,7 +152,7 @@ function Subject() {
 											content={note}
 											scale={crop.scale}
 											load={noteTrue}
-											keyID={note.id}
+											key={note.id}
 										/>
 									);
 								})}
