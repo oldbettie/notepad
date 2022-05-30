@@ -14,7 +14,6 @@ function Subject() {
 	let params = useParams();
 	const nav = useNavigate();
 	const { user } = useContext(UserContext);
-
 	const data = localStorage.getItem("userData");
 	const URL = process.env.REACT_APP_URL;
 	const [subject, setSubject] = useState(null);
@@ -24,6 +23,49 @@ function Subject() {
 	const [mouse, setMouse] = useState("crosshair");
 	const [noteTrue, setNoteTrue] = useState(false);
 	const [color, setColor] = useState("#ffff88");
+	const [allUsers, setAllUsers] = useState([]);
+	const [newUserFlag, setNewUserFlag] = useState(false)
+
+	//get all participants for this subject
+	async function allSubjectUsers() {
+		axios.get(`${URL}subject/users/${params.id}`).then((res) => {
+			return res.data;
+			}).then((userArray)=> {
+			let userNames = userArray.map((user) => {
+				return {userName: user.userName};
+			})
+			setAllUsers(userNames);
+		})
+	}
+
+	function pickUsersToJoin() {
+		let owner = subject.ownerId;
+		if(owner !== user.id) {
+			let joinerUserName = user.userName;
+			if(!allUsers.includes(joinerUserName)) {
+				const data = {
+					userId: user.id,
+					subjectId: params.id
+				}
+				axios.post(`${URL}subjects/addUser`, data)
+				.then(()=> {
+					setNewUserFlag(true);
+					console.log(`${user.id} added`)
+				})
+			}
+		}
+	} 
+
+	useEffect(() => {
+		if(user !== null && subject !== null) {
+			pickUsersToJoin()
+		}
+	}, [user, subject]);
+
+	useEffect(() => {
+		allSubjectUsers();
+		setNewUserFlag(false);
+	}, [newUserFlag]);
 
 	// controls the overall board movement and zoom
 	useGesture(
@@ -69,6 +111,8 @@ function Subject() {
 
 	function getSubject() {
 		if (!data) {
+			window.localStorage.setItem('invite', params.id);
+			console.log('no access, copying url', window.localStorage.getItem('invite'));
 			nav("/login");
 		} else {
 			axios.get(`${URL}subject/${params.id}`).then((res) => {
@@ -117,10 +161,9 @@ function Subject() {
 	useEffect(() => {
 		getSubject();
 	}, []);
-
 	return (
 		<div className={styles.outofbounds}>
-			<Users color={color} />
+			<Users color={color} userList ={allUsers}/>
 			{subject !== null ? (
 				<div>
 					<h1 className={styles.subjectTitle}>Board: {subject.title}</h1>

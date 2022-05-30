@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FiUsers } from "react-icons/fi";
 import styles from "./Users.module.scss";
 
-function Users() {
+function Users( props ) {
+	const {color, userList} = props
 	const [open, setOpen] = useState(false);
 	const [userCount, setUserCount] = useState(0);
 	const [users, setUsers] = useState([
@@ -13,6 +14,10 @@ function Users() {
 	useEffect(() => {
 		setUserCount(users.length);
 	}, []);
+
+	useEffect(() => {
+		setUsers(userList);
+	}, [userList]);
 
 	return (
 		<div
