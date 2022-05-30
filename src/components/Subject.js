@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import SubjectEditForm from "./SubjectEditForm";
 import Button from "./Button";
 import styles from "../pages/Subjects.module.scss";
 import InviteButton from "./InviteButton";
-import { UserContext } from "../UserContext";
 
 function Subject({ subject }) {
 	const URL = process.env.REACT_APP_URL;

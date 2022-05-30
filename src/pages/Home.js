@@ -19,7 +19,7 @@ function Home() {
 				<div className={styles.background}></div>
 				<div className={styles.titleDiv}>
 					<div className={styles.blockoutBox}></div>
-					<h1 className={styles.title}>The Notebook</h1>
+					<h1 className={styles.title}>Team Notes</h1>
 					<p>Your teams new notebook..</p>
 				</div>
 				<h3 className={styles.bio}>Interact as a group to share notes.</h3>
