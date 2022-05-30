@@ -24,41 +24,46 @@ function Subject() {
 	const [noteTrue, setNoteTrue] = useState(false);
 	const [color, setColor] = useState("#ffff88");
 	const [allUsers, setAllUsers] = useState([]);
-	const [newUserFlag, setNewUserFlag] = useState(false)
+	const [newUserFlag, setNewUserFlag] = useState(false);
 
 	//get all participants for this subject
 	async function allSubjectUsers() {
-		axios.get(`${URL}subject/users/${params.id}`).then((res) => {
-			return res.data;
-			}).then((userArray)=> {
-			let userNames = userArray.map((user) => {
-				return {userName: user.userName};
+		axios
+			.get(`${URL}subject/users/${params.id}`)
+			.then((res) => {
+				return res.data;
 			})
-			setAllUsers(userNames);
-		})
+			.then((userArray) => {
+				let userNames = userArray.map((user) => {
+					return { userName: user.userName };
+				});
+				setAllUsers(userNames);
+			});
+		setTimeout(() => {
+			allSubjectUsers();
+		}, 5000);
 	}
 
 	function pickUsersToJoin() {
 		let owner = subject.ownerId;
-		if(owner !== user.id) {
+		if (owner !== user.id) {
 			let joinerUserName = user.userName;
-			if(!allUsers.includes(joinerUserName)) {
+			if (!allUsers.includes(joinerUserName)) {
 				const data = {
 					userId: user.id,
-					subjectId: params.id
-				}
-				axios.post(`${URL}subjects/addUser`, data)
-				.then(()=> {
+					subjectId: params.id,
+				};
+				axios.post(`${URL}subjects/addUser`, data).then(() => {
 					setNewUserFlag(true);
-					console.log(`${user.id} added`)
-				})
+					console.log(`${user.id} added`);
+				});
 			}
 		}
-	} 
+	}
 
 	useEffect(() => {
-		if(user !== null && subject !== null) {
-			pickUsersToJoin()
+		if (user !== null && subject !== null) {
+			pickUsersToJoin();
 		}
 	}, [user, subject]);
 
@@ -111,8 +116,8 @@ function Subject() {
 
 	function getSubject() {
 		if (!data) {
-			window.localStorage.setItem('invite', params.id);
-			console.log('no access, copying url', window.localStorage.getItem('invite'));
+			window.localStorage.setItem("invite", params.id);
+			console.log("no access, copying url", window.localStorage.getItem("invite"));
 			nav("/login");
 		} else {
 			axios.get(`${URL}subject/${params.id}`).then((res) => {
@@ -163,7 +168,7 @@ function Subject() {
 	}, []);
 	return (
 		<div className={styles.outofbounds}>
-			<Users color={color} userList ={allUsers}/>
+			<Users color={color} userList={allUsers} />
 			{subject !== null ? (
 				<div>
 					<h1 className={styles.subjectTitle}>Board: {subject.title}</h1>
