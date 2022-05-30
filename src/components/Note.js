@@ -151,15 +151,12 @@ function Note({ content, scale, load, keyID }) {
 							onClick={() => deleteNote(content.id)}
 						/>
 						{!editState ? (
-							<div>
-								<Button
-									style={{ color: content.color }}
-									content={<BiPencil />}
-									classnames={styles.noteEditBtn}
-									onClick={() => setEditState(!editState)}
-								/>
-								<p className={styles.textarea}>{text}</p>
-							</div>
+							<Button
+								style={{ color: content.color }}
+								content={<BiPencil />}
+								classnames={styles.noteEditBtn}
+								onClick={() => setEditState(!editState)}
+							/>
 						) : (
 							""
 						)}
@@ -187,6 +184,7 @@ function Note({ content, scale, load, keyID }) {
 				) : (
 					""
 				)}
+				{!editState && <p className={styles.textarea}>{text}</p>}
 				<h4 className={styles.userName}>{content.user.userName}</h4>
 			</div>
 		);
