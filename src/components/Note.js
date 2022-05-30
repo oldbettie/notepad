@@ -1,7 +1,7 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import { useGesture } from "react-use-gesture";
-import { AiFillMinusCircle, AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 import { BiPencil } from "react-icons/bi";
 import { BsSticky } from "react-icons/bs";
 import axios from "axios";
@@ -10,7 +10,7 @@ import Button from "./Button";
 
 function Note({ content, scale, load, keyID }) {
 	let noteRef = useRef();
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	let [noteCrop, setNoteCrop] = useState({ x: content.x_axis, y: content.y_axis });
 	const [mouse, setMouse] = useState("grab");
 	const data = localStorage.getItem("userData");

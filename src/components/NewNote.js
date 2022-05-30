@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
-import { AiFillPlusCircle, AiFillMinusCircle, AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 import { BsStickyFill, BsSticky } from "react-icons/bs";
 import axios from "axios";
 import Button from "../components/Button";

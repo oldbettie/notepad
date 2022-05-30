@@ -83,11 +83,11 @@ function Subject() {
 			.then((res) => {
 				setNotes(res.data);
 				setNoteTrue(true);
+				setTimeout(() => {
+					getNotes();
+				}, 15000);
 			})
 			.catch((err) => setError(err));
-		setTimeout(() => {
-			getNotes();
-		}, 15000);
 	}
 
 	useEffect(() => {
@@ -104,7 +104,7 @@ function Subject() {
 		document.addEventListener("keyup", (e) => {
 			!e.ctrlKey && setMouse("crosshair");
 		});
-	}, []);
+	});
 
 	// runs once subject has returned
 	useEffect(() => {
@@ -166,7 +166,7 @@ function Subject() {
 					"Loading..."
 				)}
 			</div>
-
+			{error && <h4>{error}</h4>}
 			<NewNote passedColor={(value) => setColor(value)} />
 		</div>
 	);
