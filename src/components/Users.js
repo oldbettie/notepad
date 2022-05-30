@@ -29,13 +29,13 @@ function Users( props ) {
 					: { width: "180px", height: `${40 * userCount + 5}px` }
 			}>
 			{!open ? (
-				<div className={styles.userContentContainer} style={{ color: color }}>
+				<div className={styles.userContentContainer}>
 					<FiUsers />
 				</div>
 			) : (
 				<div
 					className={styles.userContentContainerOpen}
-					style={{ color: color, height: `${40 * userCount}px` }}>
+					style={{ height: `${40 * userCount}px` }}>
 					<div className={styles.allUsersContainer}>
 						<div className={styles.currentUser}>
 							<h6>oldbettie</h6>

@@ -14,14 +14,14 @@ $postit: #ffff88;
 	transition: 0.5s;
 }
 .messageSelector {
-	color: #ffffffc9;
+	color: $third;
 	position: fixed;
 	margin: 0.5em;
 	bottom: 0vh;
 	right: 0px;
 	width: 80px;
 	height: 80px;
-	font-size: 70px;
+	font-size: 55px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -45,12 +45,12 @@ $postit: #ffff88;
 
 	.noteBtn {
 		position: fixed;
-		right: 25px;
-		bottom: 155px;
+		right: 50px;
+		bottom: 153px;
 		background: none;
 		border: none;
-		font-size: 29px;
-		color: $primary;
+		font-size: 25px;
+		color: $third;
 		height: 25px;
 		width: 25px;
 		border-radius: 50%;
@@ -58,10 +58,10 @@ $postit: #ffff88;
 	.closeNote {
 		border: none;
 		position: fixed;
-		right: 30px;
+		right: -5px;
 		bottom: 133px;
 		font-size: 28px;
-		color: $primary;
+		color: $third;
 		cursor: pointer;
 	}
 

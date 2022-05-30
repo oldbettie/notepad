@@ -13,7 +13,7 @@ function Subject() {
 	let imageRef = useRef();
 	let params = useParams();
 	const nav = useNavigate();
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const data = localStorage.getItem("userData");
 	const URL = process.env.REACT_APP_URL;
 	const [subject, setSubject] = useState(null);
@@ -127,11 +127,11 @@ function Subject() {
 			.then((res) => {
 				setNotes(res.data);
 				setNoteTrue(true);
+				setTimeout(() => {
+					getNotes();
+				}, 15000);
 			})
 			.catch((err) => setError(err));
-		setTimeout(() => {
-			getNotes();
-		}, 15000);
 	}
 
 	useEffect(() => {
@@ -148,7 +148,7 @@ function Subject() {
 		document.addEventListener("keyup", (e) => {
 			!e.ctrlKey && setMouse("crosshair");
 		});
-	}, []);
+	});
 
 	// runs once subject has returned
 	useEffect(() => {
@@ -161,16 +161,17 @@ function Subject() {
 	useEffect(() => {
 		getSubject();
 	}, []);
-	
 	return (
 		<div className={styles.outofbounds}>
 			<Users color={color} userList ={allUsers}/>
 			{subject !== null ? (
-				<h1 className={styles.subjectTitle}>Board: {subject.title}</h1>
+				<div>
+					<h1 className={styles.subjectTitle}>Board: {subject.title}</h1>
+					<DownloadBtn color={color} notes={notes} title={subject.title} />
+				</div>
 			) : (
 				""
 			)}
-			<DownloadBtn color={color} />
 			<div
 				className={styles.screenBackground}
 				ref={imageRef}
@@ -208,7 +209,7 @@ function Subject() {
 					"Loading..."
 				)}
 			</div>
-
+			{error && <h4>{error}</h4>}
 			<NewNote passedColor={(value) => setColor(value)} />
 		</div>
 	);

@@ -8,11 +8,11 @@ import styles from "../pages/Profile.module.scss";
 function EditProfile() {
 	const URL = process.env.REACT_APP_URL;
 	let params = useParams();
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const [userName, setUserName] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setlastName] = useState("");
-	const [color, setColor] = useState("#ffff88");
+	const [color, setColor] = useState(user.color);
 	const [error, setError] = useState("");
 
 	function updateUser(e) {

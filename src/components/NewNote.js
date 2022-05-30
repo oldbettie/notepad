@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
-import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
+import { BsStickyFill, BsSticky } from "react-icons/bs";
 import axios from "axios";
 import Button from "../components/Button";
 import styles from "./NewNote.module.scss";
@@ -10,10 +11,9 @@ import ColorPicker from "./ColorPicker";
 function NewNote({ passedColor }) {
 	const URL = process.env.REACT_APP_URL;
 	let params = useParams();
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const [note, setNote] = useState(null);
 	const [color, setColor] = useState("#ffff88");
-	const [message, setMessage] = useState(true);
 	const [messageOp, setMessageOp] = useState(0);
 	const [noteState, setNoteState] = useState(false);
 
@@ -63,11 +63,10 @@ function NewNote({ passedColor }) {
 	}
 	return (
 		<div>
-			{message && (
-				<div className={styles.postedMessage} style={{ opacity: messageOp }}>
-					<h3 style={{ color: color }}>Submitted Note!</h3>
-				</div>
-			)}
+			<div className={styles.postedMessage} style={{ opacity: messageOp }}>
+				<h3 style={{ color: color }}>Submitted Note!</h3>
+			</div>
+
 			{noteState ? (
 				<div>
 					<ColorPicker getColor={(value) => passColor(value)} color={color} />
@@ -75,7 +74,7 @@ function NewNote({ passedColor }) {
 						className={styles.noteContainer}
 						style={{ backgroundColor: color }}>
 						<Button
-							content={<AiFillMinusCircle />}
+							content={<AiOutlineDelete />}
 							classnames={styles.closeNote}
 							onClick={closeNoteBox}
 						/>
@@ -83,7 +82,7 @@ function NewNote({ passedColor }) {
 							<h5>{user && user.userName}</h5>
 							{note && (
 								<Button
-									content={<AiFillPlusCircle />}
+									content={<BsSticky />}
 									classnames={styles.noteBtn}
 								/>
 							)}
@@ -105,7 +104,7 @@ function NewNote({ passedColor }) {
 					onClick={() => setNoteState(!noteState)}
 					className={styles.messageSelector}
 					style={{ backgroundColor: color }}>
-					<AiFillPlusCircle />
+					<BsStickyFill />
 				</div>
 			)}
 		</div>

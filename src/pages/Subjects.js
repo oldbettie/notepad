@@ -73,22 +73,24 @@ function Subjects() {
 	function getAllSubjects() {
 		const userSubjects = [];
 		let thisUser = params.id;
-		axios.get(`${URL}subjects/all`).then((res) => {
-			return res.data;
-		})
-		.then((allSubjects) => {
-			for(let i=0; i < allSubjects.length; i++) {
-				if(allSubjects[i].users.length > 0) {
-					for(let j=0; j < allSubjects[i].users.length; j++) {
-						let subjectUserId = allSubjects[i].users[j].id;
-						if(subjectUserId == thisUser ) {
-							userSubjects.push(allSubjects[i]);
+		axios
+			.get(`${URL}subjects/all`)
+			.then((res) => {
+				return res.data;
+			})
+			.then((allSubjects) => {
+				for (let i = 0; i < allSubjects.length; i++) {
+					if (allSubjects[i].users.length > 0) {
+						for (let j = 0; j < allSubjects[i].users.length; j++) {
+							let subjectUserId = allSubjects[i].users[j].id;
+							if (subjectUserId === thisUser) {
+								userSubjects.push(allSubjects[i]);
+							}
 						}
 					}
 				}
-			}
-			setParticipation(userSubjects);
-		})
+				setParticipation(userSubjects);
+			});
 	}
 
 	return (

@@ -1,23 +1,15 @@
-import React, { useState, useContext, useEffect } from "react";
-import { UserContext } from "../UserContext";
+import React, { useState } from "react";
 import { BsPaintBucket } from "react-icons/bs";
 import styles from "./ColorPicker.module.scss";
 
 function ColorPicker({ getColor, color }) {
-	const { user, setUser } = useContext(UserContext);
 	const [open, setOpen] = useState(false);
-	const [passedColor, setPassedColor] = useState(color);
 
 	// getColor passes it to the parent for use and saving in db later
 	function updateColor(hash) {
 		getColor(hash);
 	}
 
-	useEffect(() => {
-		if (user) {
-			setPassedColor(user.color);
-		}
-	}, []);
 	return (
 		<div
 			className={styles.pickerContainer}
