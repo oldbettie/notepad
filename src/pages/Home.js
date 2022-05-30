@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import styles from "./Home.module.scss";
 
 function Home() {
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const nav = useNavigate();
 
 	useEffect(() => {

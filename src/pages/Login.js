@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
-import { getUserAuth } from "../helpers";
 import styles from "./Login.module.scss";
 import Button from "../components/Button";
 import { UserContext } from "../UserContext";
@@ -25,7 +24,6 @@ function Login() {
 			.then((res) => {
 				if (!res.data.auth) {
 					setLoginStatus(false);
-					setEmail(res.data.message);
 					setError(res.data.message);
 				} else {
 					console.log(res.data);
@@ -48,7 +46,7 @@ function Login() {
 					nav(`/subjects/${res.data.userId}`);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => setError(err));
 	}
 
 	return (
@@ -80,6 +78,7 @@ function Login() {
 					<Button content="Sign Up" classnames="btn btnNav btnLogin" />
 				</NavLink>
 			</div>
+			{loginStatus && <h3>{error}</h3>}
 		</div>
 	);
 }

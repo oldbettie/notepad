@@ -11,10 +11,9 @@ import ColorPicker from "./ColorPicker";
 function NewNote({ passedColor }) {
 	const URL = process.env.REACT_APP_URL;
 	let params = useParams();
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const [note, setNote] = useState(null);
 	const [color, setColor] = useState("#ffff88");
-	const [message, setMessage] = useState(true);
 	const [messageOp, setMessageOp] = useState(0);
 	const [noteState, setNoteState] = useState(false);
 
@@ -64,11 +63,10 @@ function NewNote({ passedColor }) {
 	}
 	return (
 		<div>
-			{message && (
-				<div className={styles.postedMessage} style={{ opacity: messageOp }}>
-					<h3 style={{ color: color }}>Submitted Note!</h3>
-				</div>
-			)}
+			<div className={styles.postedMessage} style={{ opacity: messageOp }}>
+				<h3 style={{ color: color }}>Submitted Note!</h3>
+			</div>
+
 			{noteState ? (
 				<div>
 					<ColorPicker getColor={(value) => passColor(value)} color={color} />

@@ -13,7 +13,7 @@ function Subject() {
 	let imageRef = useRef();
 	let params = useParams();
 	const nav = useNavigate();
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 
 	const data = localStorage.getItem("userData");
 	const URL = process.env.REACT_APP_URL;

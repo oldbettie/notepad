@@ -113,13 +113,10 @@ function Note({ content, scale, load, keyID }) {
 			.catch((err) => {});
 	}
 
-	function openEdit() {
-		setEditState(!editState);
-	}
-
 	function mouseDown() {
 		setMouse("grabbing");
 	}
+
 	useEffect(() => {
 		document.addEventListener("keydown", (e) => {
 			e.ctrlKey && setMouse("zoom-in");
@@ -171,6 +168,7 @@ function Note({ content, scale, load, keyID }) {
 				{editState ? (
 					<form onSubmit={editNote}>
 						<textarea
+							style={{ border: "1px solid black" }}
 							className={styles.textarea}
 							required
 							type="textarea"
@@ -178,6 +176,7 @@ function Note({ content, scale, load, keyID }) {
 							onChange={(e) => {
 								setText(e.target.value);
 							}}
+							onBlur={() => setEditState(!editState)}
 						/>
 						<Button
 							style={{ color: content.color }}

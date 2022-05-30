@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 import styles from "./Profile.module.scss";
 import Button from "../components/Button";
@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import EditProfile from "../components/EditProfile";
 
 function Profile() {
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const [editStatus, setEditStatus] = useState(true);
 
 	return (

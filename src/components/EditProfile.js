@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import Button from "./Button";
@@ -8,7 +8,7 @@ import styles from "../pages/Profile.module.scss";
 function EditProfile() {
 	const URL = process.env.REACT_APP_URL;
 	let params = useParams();
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const [userName, setUserName] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setlastName] = useState("");

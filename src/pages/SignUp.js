@@ -17,7 +17,6 @@ function SignUp() {
 	const [registerEmail, setRegisterEmail] = useState("");
 	const [registerPassword, setRegisterPassword] = useState("");
 	const [status, setStatus] = useState(null);
-	const [loginStatus, setLoginStatus] = useState(false);
 
 	function register(e) {
 		e.preventDefault();
@@ -39,8 +38,6 @@ function SignUp() {
 						.then((res) => {
 							if (!res.data.auth) {
 								setStatus(res.data.message);
-								setLoginStatus(false);
-								setEmail(res.data.message);
 							} else {
 								setStatus(res.data.message);
 								setUser({
@@ -57,7 +54,6 @@ function SignUp() {
 										id: res.data.userId,
 									})
 								);
-								setLoginStatus(true);
 								nav(`/subjects/${res.data.userId}`);
 							}
 						});
