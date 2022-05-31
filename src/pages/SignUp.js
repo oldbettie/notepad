@@ -2,8 +2,9 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "../components/Button";
-import style from "./SignUp.module.scss";
+import styles from "./SignUp.module.scss";
 import { UserContext } from "../UserContext";
+import Footer from "../components/Footer";
 
 function SignUp() {
 	// this line needs to be in every component that needs auth
@@ -69,37 +70,42 @@ function SignUp() {
 	}
 
 	return (
-		<div className={style.formContainer}>
-			<form onSubmit={register}>
-				<h3>Register User</h3>
-				<input
-					placeholder="username"
-					required
-					onChange={(event) => {
-						setUsername(event.target.value);
-					}}
-				/>
-				<input
-					placeholder="Email..."
-					required
-					type="email"
-					onChange={(event) => {
-						setRegisterEmail(event.target.value);
-					}}
-				/>
-				<input
-					placeholder="Password..."
-					required
-					type="password"
-					onChange={(event) => {
-						setRegisterPassword(event.target.value);
-					}}
-				/>
-				{/* <NavLink to={"/"}> */}
-				<Button content="Register" />
-				{/* </NavLink> */}
-			</form>
-			{status != null && <h2>{status}</h2>}
+		<div className={styles.background}>
+			<div className={styles.formPadding}>
+				<div className={styles.formContainer}>
+					<form onSubmit={register}>
+						<h3>Register User</h3>
+						<input
+							placeholder="username"
+							required
+							onChange={(event) => {
+								setUsername(event.target.value);
+							}}
+						/>
+						<input
+							placeholder="Email..."
+							required
+							type="email"
+							onChange={(event) => {
+								setRegisterEmail(event.target.value);
+							}}
+						/>
+						<input
+							placeholder="Password..."
+							required
+							type="password"
+							onChange={(event) => {
+								setRegisterPassword(event.target.value);
+							}}
+						/>
+						{/* <NavLink to={"/"}> */}
+						<Button content="Register" />
+						{/* </NavLink> */}
+					</form>
+					{status != null && <h2>{status}</h2>}
+				</div>
+			</div>
+			<Footer />
 		</div>
 	);
 }

@@ -4,6 +4,7 @@ import axios from "axios";
 import styles from "./Login.module.scss";
 import Button from "../components/Button";
 import { UserContext } from "../UserContext";
+import Footer from "../components/Footer";
 
 function Login() {
 	const nav = useNavigate();
@@ -26,7 +27,6 @@ function Login() {
 					setLoginStatus(false);
 					setError(res.data.message);
 				} else {
-					console.log(res.data);
 					setUser({
 						auth: true,
 						id: res.data.userId,
@@ -50,35 +50,40 @@ function Login() {
 	}
 
 	return (
-		<div className={styles.formContainer}>
-			<h3>{user && user.email}</h3>
-			<form onSubmit={login}>
-				<h3>Sign in</h3>
-				<input
-					placeholder="Email..."
-					required
-					onChange={(event) => {
-						setEmail(event.target.value);
-					}}
-				/>
-				<input
-					placeholder="Password..."
-					required
-					type="password"
-					onChange={(event) => {
-						setPassword(event.target.value);
-					}}
-				/>
-				<Button content="Sign in" />
-				{error && <h4>{error}</h4>}
-			</form>
-			<div className={styles.signupContainer}>
-				<h4>Not a member?? sign up today!! </h4>
-				<NavLink to={"/signup"}>
-					<Button content="Sign Up" classnames="btn btnNav btnLogin" />
-				</NavLink>
+		<div className={styles.background}>
+			<div className={styles.formPadding}>
+				<div className={styles.formContainer}>
+					<h3>{user && user.email}</h3>
+					<form onSubmit={login}>
+						<h3>Sign in</h3>
+						<input
+							placeholder="Email..."
+							required
+							onChange={(event) => {
+								setEmail(event.target.value);
+							}}
+						/>
+						<input
+							placeholder="Password..."
+							required
+							type="password"
+							onChange={(event) => {
+								setPassword(event.target.value);
+							}}
+						/>
+						<Button content="Sign in" classnames={styles.btnLogin} />
+						{/* {error && <h4>{error}</h4>} */}
+					</form>
+					<div className={styles.signupContainer}>
+						<h4>Not a member?? sign up today!! </h4>
+						<NavLink to={"/signup"}>
+							<Button content="Sign Up" classnames="btn btnNav btnLogin" />
+						</NavLink>
+					</div>
+					{loginStatus && <h3>{error}</h3>}
+				</div>
 			</div>
-			{loginStatus && <h3>{error}</h3>}
+			<Footer />
 		</div>
 	);
 }

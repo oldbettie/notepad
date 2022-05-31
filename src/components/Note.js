@@ -18,6 +18,7 @@ function Note({ content, scale, load, keyID }) {
 	const URL = process.env.REACT_APP_URL;
 	const [editState, setEditState] = useState(false);
 	const [text, setText] = useState(content.note_text);
+	const [userState, setUserState] = useState(false);
 
 	// all the logic for controlling each note individually
 	useGesture(
@@ -58,7 +59,8 @@ function Note({ content, scale, load, keyID }) {
 	);
 
 	// updates the location on the subject board
-	function updateLocation() {
+	function updateNote(e) {
+		e.preventDefault();
 		setMouse("grab");
 		axios
 			.put(
@@ -66,25 +68,6 @@ function Note({ content, scale, load, keyID }) {
 				{
 					x_axis: noteCrop.x,
 					y_axis: noteCrop.y,
-				},
-				{
-					headers: {
-						"x-access-token": token,
-					},
-				}
-			)
-			.then((res) => {})
-			.catch((err) => {
-				console.log(err);
-			});
-	}
-
-	function editNote(e) {
-		e.preventDefault();
-		axios
-			.put(
-				`${URL}note/${content.id}`,
-				{
 					note_text: text,
 				},
 				{
@@ -97,7 +80,6 @@ function Note({ content, scale, load, keyID }) {
 			.catch((err) => {
 				console.log(err);
 			});
-		setEditState(!editState);
 	}
 
 	function deleteNote(id) {
@@ -126,7 +108,13 @@ function Note({ content, scale, load, keyID }) {
 		});
 	}, []);
 
-	if (load) {
+	useEffect(() => {
+		if (user !== null) {
+			setUserState(true);
+		}
+	}, [user]);
+
+	if (content) {
 		return (
 			<div
 				key={keyID}
@@ -141,8 +129,8 @@ function Note({ content, scale, load, keyID }) {
 					cursor: mouse,
 				}}
 				onMouseDown={mouseDown}
-				onMouseUp={updateLocation}>
-				{content.userId === user.id && (
+				onMouseUp={updateNote}>
+				{content.userId === user?.id && (
 					<div>
 						<Button
 							style={{ color: content.color }}
@@ -163,7 +151,7 @@ function Note({ content, scale, load, keyID }) {
 					</div>
 				)}
 				{editState ? (
-					<form onSubmit={editNote}>
+					<form onSubmit={updateNote}>
 						<textarea
 							style={{ border: "1px solid black" }}
 							className={styles.textarea}

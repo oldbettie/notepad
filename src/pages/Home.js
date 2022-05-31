@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import styles from "./Home.module.scss";
+import Footer from "../components/Footer";
 
 function Home() {
 	const { user } = useContext(UserContext);
@@ -27,12 +28,7 @@ function Home() {
 					These can be saved or downloaded and used later..
 				</h3>
 			</div>
-			<footer className={styles.footer}>
-				<h4>
-					Created by: Jayj Eaton & Pedro Vivas | Design by: Leila O'sullivan
-				</h4>
-				<h5>Built with React and Express</h5>
-			</footer>
+			<Footer />
 		</main>
 	);
 }
