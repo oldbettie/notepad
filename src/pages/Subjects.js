@@ -98,7 +98,6 @@ function Subjects() {
 	return (
 		<div className={styles.subjectsMain}>
 			<h2 className={styles.subjectsTitle}>Your Subjects</h2>
-
 			<div>
 				<div className={styles.subjectHolder}>
 					<div className={styles.subjectsContainer}>
