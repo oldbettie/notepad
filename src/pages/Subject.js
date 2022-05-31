@@ -39,9 +39,6 @@ function Subject() {
 				});
 				setAllUsers(userNames);
 			});
-		setTimeout(() => {
-			allSubjectUsers();
-		}, 5000);
 	}
 
 	function pickUsersToJoin() {
@@ -68,8 +65,11 @@ function Subject() {
 	}, [user, subject]);
 
 	useEffect(() => {
-		allSubjectUsers();
+		const usersubjectInt = setInterval(() => {
+			allSubjectUsers();
+		}, 20000);
 		setNewUserFlag(false);
+		return () => clearInterval(usersubjectInt);
 	}, [newUserFlag]);
 
 	// controls the overall board movement and zoom
@@ -134,9 +134,6 @@ function Subject() {
 				setNoteTrue(true);
 			})
 			.catch((err) => setError(err));
-		setTimeout(() => {
-			getNotes();
-		}, 10000);
 	}
 
 	useEffect(() => {
@@ -158,7 +155,11 @@ function Subject() {
 	// runs once subject has returned
 	useEffect(() => {
 		if (subject !== null) {
+			const noteInt = setInterval(() => {
+				getNotes();
+			}, 10000);
 			getNotes();
+			return () => clearInterval(noteInt);
 		}
 	}, [subject]);
 
