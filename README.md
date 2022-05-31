@@ -15,7 +15,7 @@ Full-stack web application with Interactive UI, User/Sessions and RESTful API be
 ## Stack
 
 - ReactJS                  UI
-- Node / Express Server,   RESTFul API
+- Node / Express           Server, RESTFul API
 - MySQL                    Database
 - Sequelize                ORM
 - deployed on              Heroku/Netifly
