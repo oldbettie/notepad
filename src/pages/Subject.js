@@ -158,7 +158,7 @@ function Subject() {
 		if (subject !== null) {
 			const noteInt = setInterval(() => {
 				getNotes();
-			}, 5000);
+			}, 3000);
 			getNotes();
 			return () => clearInterval(noteInt);
 		}
