@@ -27,7 +27,7 @@ Full-stack web application with Interactive UI, User/Sessions and RESTful API be
 
 ### Test Login
 
-A new user account can be created for a blank board
+A new user account can be created for a blank board. </br>
 logging with the test user below will show a pre-set board with multiple users and several notes.
 
 <pre>
