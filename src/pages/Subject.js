@@ -68,7 +68,7 @@ function Subject() {
 	useEffect(() => {
 		const usersubjectInt = setInterval(() => {
 			allSubjectUsers();
-		}, 20000);
+		}, 5000);
 		setNewUserFlag(false);
 		return () => clearInterval(usersubjectInt);
 	}, [newUserFlag]);
@@ -168,7 +168,7 @@ function Subject() {
 	useEffect(() => {
 		getSubject();
 	}, []);
-	
+
 	return (
 		<div className={styles.outofbounds}>
 			<Users color={color} userList={allUsers} />
