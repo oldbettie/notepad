@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 function InviteButton(props) {
 	const URL = process.env.REACT_APP_URL;
-	// const FRONT = "http://localhost:3001/";
 	const FRONT = process.env.FRONT;
 	const [createInvite, setCreateInvite] = useState(true);
 	const [inviteLink, setInviteLink] = useState("");

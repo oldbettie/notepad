@@ -97,7 +97,7 @@ function Subjects() {
 
 	return (
 		<div className={styles.subjectsMain}>
-			<h2>Welcome to your Subjects</h2>
+			<h2 className={styles.subjectsTitle}>Welcome to your Subjects</h2>
 			{status && (
 				<>
 					{newSubject ? (
@@ -109,7 +109,7 @@ function Subjects() {
 			)}
 			<div >
 				<div className={styles.subjectHolder}>
-					<h3>Created subjects</h3>
+					<h3 className={styles.subjectsSubTitle}>Created subjects</h3>
 					<div className={styles.subjectsContainer}>
 						{ownSubjects.map((subject) => {
 							return <Subject subject={subject} />;
@@ -117,7 +117,7 @@ function Subjects() {
 					</div>
 				</div>
 				<div className={styles.subjectHolder}>
-					<h3>Subjects you are part of</h3>
+					<h3 className={styles.subjectsSubTitle}>Subjects you are part of</h3>
 					<div className={styles.subjectsContainer}>
 						{participation.map((subject) => {
 							return <SubjectParticipant subject={subject} />;

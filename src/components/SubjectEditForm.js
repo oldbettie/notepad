@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../UserContext";
-import { useParams } from "react-router-dom";
+import styles from "../components/Subject.module.scss";
+import { BiPencil } from "react-icons/bi";
 
 function SubjectEditForm({id}) {
-	let params = useParams();
-	const nav = useNavigate();
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
 	const URL = process.env.REACT_APP_URL;
@@ -40,11 +38,12 @@ function SubjectEditForm({id}) {
 				<input
 					type="text"
 					placeholder="Subject name..."
+					size="10"
 					onChange={(event) => {
 						setTitle(event.target.value);
 					}}
 				/>
-				<button type="submit">Update Subject</button>
+				<button className={styles.editBtn}  type="submit">{<BiPencil />}</button>
 			</form>
 		</div>
 	);

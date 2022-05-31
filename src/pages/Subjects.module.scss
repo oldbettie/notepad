@@ -1,12 +1,25 @@
 .subjectsMain {
 	margin: 0 auto;
 	text-align: center;
+	background-color: rgba(68, 68, 68, 0.1);
 }
 
 .subjectsContainer {
+	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	text-align: center;
 	align-items: center;
 	justify-content: center;
+}
+
+.subjectsTitle {
+	font-size: 30px;
+	padding: 0.5em;
+	font-weight: bolder;
+}
+
+.subjectsSubTitle {
+	font-size: 20px;
+	margin: 0.5em;
 }

@@ -1,21 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Button from "./Button";
-import styles from "../pages/Subjects.module.scss";
+import styles from "../components/Subject.module.scss";
 
 function SubjectParticipant({ subject }) {
 
 	return (
-		<div key={subject.id} className={styles.subjectsContainer}>
-				<div>
-					<span className={styles.subjectTitle}>
-						{subject.title}
-					</span>
-					<NavLink to={`/subject/${subject.id}`}>
-						<Button content="Join" />
-					</NavLink>
-				</div>
-		</div>
+		<NavLink to={`/subject/${subject.id}`}>
+			<div key={subject.id} className={styles.subjectContainer}>
+				
+				<h4 className={styles.titleHeader}>
+					{subject.title}
+				</h4>
+				{/* <Button content="Join" />	 */}
+			</div>
+		</NavLink>
 	);
 }
 
