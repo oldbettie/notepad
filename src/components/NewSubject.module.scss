@@ -1,0 +1,32 @@
+$primary: #ffffff;
+$secondary: #cccccc;
+$third: #444444;
+
+.subjectContainer {
+	position: relative;
+	display: inline-block;
+	background-image: url(../images/subject-icon.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 1em;
+	width: 250px;
+	height: 250px;
+	h4 {
+		padding-top: 12px;
+		color: $secondary;
+		text-align: center;
+		width: 100%;
+		font-size: 30px;
+	}
+	.newNoteBtn {
+		position: absolute;
+		left: 55px;
+		top: 53px;
+		border: none;
+		font-size: 100px;
+		color: $secondary;
+	}
+	.newNoteBtn:hover {
+		color: #998484;
+	}
+}

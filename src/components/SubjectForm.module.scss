@@ -1,0 +1,31 @@
+$primary: #ffffff;
+$secondary: #cccccc;
+$third: #444444;
+
+.subjectContainer {
+	position: relative;
+	display: inline-block;
+	background-image: url(../images/subject-icon.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 1em;
+	width: 250px;
+	height: 250px;
+	padding: 5px;
+	padding-top: 10px;
+	input {
+		color: black;
+		margin-top: 4px;
+		border: none;
+		padding: 7px 5px;
+		width: 90%;
+		opacity: 0.6;
+		background-color: $secondary;
+	}
+	.formBtn {
+		margin-top: 25px;
+		border: none;
+		background-color: $secondary;
+		opacity: 0.8;
+	}
+}

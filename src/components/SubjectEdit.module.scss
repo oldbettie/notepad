@@ -1,0 +1,36 @@
+$primary: #ffffff;
+$secondary: #cccccc;
+$third: #444444;
+
+.subjectContainer {
+	padding: 5px;
+	padding-top: 10px;
+	input {
+		color: black;
+		margin-top: 10px;
+		border: none;
+		padding: 7px 5px;
+		width: 90%;
+		opacity: 0.6;
+		background-color: $secondary;
+	}
+	.Btn {
+		position: absolute;
+		border: none;
+		font-size: 60px;
+		width: 70px;
+		height: 70px;
+		color: $secondary;
+
+		border-radius: 50%;
+		opacity: 0.9;
+		padding: 5px 0;
+		top: 100px;
+	}
+	.formBtn {
+		left: 30px;
+	}
+	.Btn:hover {
+		color: #998484;
+	}
+}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../UserContext";
 import { useParams } from "react-router-dom";
+import styles from "./SubjectForm.module.scss";
 
 function SubjectForm() {
 	let params = useParams();
@@ -33,7 +34,7 @@ function SubjectForm() {
 			});
 	}
 	return (
-		<div>
+		<div className={styles.subjectContainer}>
 			<form onSubmit={createSubject}>
 				<input
 					type="text"
@@ -42,7 +43,9 @@ function SubjectForm() {
 						setTitle(event.target.value);
 					}}
 				/>
-				<button type="submit">Add Subject</button>
+				<button type="submit" className={styles.formBtn}>
+					Create Subject
+				</button>
 			</form>
 		</div>
 	);

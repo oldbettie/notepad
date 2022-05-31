@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import SubjectEditForm from "./SubjectEditForm";
 import Button from "./Button";
-import styles from "../components/Subject.module.scss";
+import styles from "./Subject.module.scss";
 import InviteButton from "./InviteButton";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiPencil } from "react-icons/bi";
@@ -16,15 +16,19 @@ function Subject({ subject }) {
 	const [createInvite, setCreateInvite] = useState(true);
 	const [inviteLink, setInviteLink] = useState("");
 	const linkText = `${FRONT}subject/${subject.id}`;
+	const [copied, setCopied] = useState(false);
 
-	
-		useEffect(() => {
-			setInviteLink(linkText);
-		}, [subject]);
-	
-		const copyTextToClipboard = async () => {
-			await navigator.clipboard.writeText(inviteLink);
-		};
+	useEffect(() => {
+		setInviteLink(linkText);
+	}, [subject]);
+
+	const copyTextToClipboard = async () => {
+		await navigator.clipboard.writeText(inviteLink);
+		setCopied(true);
+		setTimeout(() => {
+			setCopied(false);
+		}, 3000);
+	};
 
 	function deleteSubject(id) {
 		axios
@@ -37,26 +41,44 @@ function Subject({ subject }) {
 	}
 
 	return (
-		
-			<div key={subject.id} className={styles.subjectContainer}>
-				{edit ? (
-					<>
-						<h4 className={styles.titleHeader}>
-							{subject.title}
-						</h4>
-						<button className={styles.editBtn} onClick={() => setEdit(!edit)} >{<BiPencil />}</button>
-						<button className={styles.deleteBtn} onClick={() => deleteSubject(subject.id)}>{<AiOutlineDelete />}</button>
-						<button className={styles.inviteBtn} onClick={() => copyTextToClipboard()}><FiUsers /></button>
-						{/* <InviteButton className={styles.inviteBtn} subjectId={<FiUsers />} /> */}
-						<NavLink to={`/subject/${subject.id}`}>
-							Join
-						</NavLink>
-					</>		
-				) : (
-					<SubjectEditForm id={subject.id} />
-				)}
-			</div>
-		
+		<div key={subject.id} className={styles.subjectContainer}>
+			{edit ? (
+				<>
+					<h4 className={styles.titleHeader}>{subject.title}</h4>
+					{copied && (
+						<div className={styles.popUp}>
+							<h4>Copied to Clipboard!!</h4>
+						</div>
+					)}
+					<Button
+						content={<BiPencil />}
+						classnames={`${styles.editBtn} ${styles.Btn}`}
+						onClick={() => setEdit(!edit)}
+					/>
+
+					<Button
+						content={<AiOutlineDelete />}
+						classnames={`${styles.deleteBtn} ${styles.Btn}`}
+						onClick={() => deleteSubject(subject.id)}
+					/>
+
+					<Button
+						content={<FiUsers />}
+						classnames={`${styles.inviteBtn} ${styles.Btn}`}
+						onClick={() => copyTextToClipboard()}
+					/>
+
+					{/* <InviteButton className={styles.inviteBtn} subjectId={<FiUsers />} /> */}
+					<NavLink to={`/subject/${subject.id}`}>
+						<Button
+							content="Enter"
+							classnames={`${styles.joinBtn} ${styles.Btn}`}></Button>
+					</NavLink>
+				</>
+			) : (
+				<SubjectEditForm id={subject.id} closeBox={() => setEdit(!edit)} />
+			)}
+		</div>
 	);
 }
 

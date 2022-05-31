@@ -55,7 +55,7 @@ Password: chicken
 
 4. the session logic sometimes has issues this should be fixed in the live version it appears to be a local issue.
 
-## updates
+## Updates
 
 may 31st. 2022
 

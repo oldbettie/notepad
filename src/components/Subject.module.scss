@@ -3,82 +3,80 @@ $secondary: #cccccc;
 $third: #444444;
 
 .subjectContainer {
-    position: relative;
-    display: inline-block;
-    background-image: url(../images/subject-icon.png );
-    background-size: cover;
-    background-repeat: no-repeat;
+	position: relative;
+	display: inline-block;
+	background-image: url(../images/subject-icon.png);
+	background-size: cover;
+	background-repeat: no-repeat;
 	margin: 1em;
-	width: 230px;
-    height: 240px;
-    z-index: 1000;
+	width: 250px;
+	height: 250px;
 
-}
+	.titleHeader {
+		margin-top: 10px;
+		font-family: sans-serif;
+		color: $secondary;
+		font-size: 30px;
+		text-transform: capitalize;
+	}
+	.Btn {
+		position: absolute;
+		color: $secondary;
+		border: none;
+		font-size: 30px;
+		opacity: 0.7;
+		padding: 0px 8px;
+		width: 30px;
+		height: 30px;
+	}
 
-.titleHeader {
-    margin-top: 5px;
-    background-color: rgba(68, 68, 68, 0.3);
-    font-family: peaelliebellie, serif;
-    color: white;
-    font-size: 20px;
-}
-
-.inviteBtn {
-    margin-left: 30px;
-    text-align: right;
-}
-
-.deleteBtn {
-    position: absolute;
-    color: white;
-    left: -5px;
-    top: 0px;
-    padding: 0px 8px;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    opacity: 0.7;
-    font-size: 30px;
-}
-
-.editBtn {
-    position: absolute;
-    color:white;
-    right: 15px;
-    top: 3px;
-    padding: 0px 8px;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    opacity: 0.7;
-    font-size: 30px;
-}
-
-.inviteBtn {
-    position: absolute;
-    color: white;
-    left: -20px;
-    bottom: 10px;
-    padding: 0px 8px;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    opacity: 0.7;
-    font-size: 30px;
-    z-index: 1001;
-}
-
-.deleteBtn:hover {
-    border: none;
-}
-
-.editBtn:hover {
-    border: none;
-}
-
-.inviteBtn:hover {
-    border: none;
+	.deleteBtn {
+		right: 15px;
+		bottom: 0px;
+	}
+	.editBtn {
+		left: 0px;
+		bottom: 0px;
+	}
+	.inviteBtn {
+		left: 95px;
+		bottom: 0px;
+	}
+	.joinBtn {
+		width: 240px;
+		height: 200px;
+		left: -5px;
+		top: -5px;
+		color: $secondary;
+		opacity: 0;
+		font-size: 45px;
+		p {
+			position: absolute;
+			opacity: 1;
+			top: 40px;
+			left: 65px;
+		}
+	}
+	.Btn:hover,
+	.titleHeader:hover {
+		color: #998484;
+		cursor: pointer;
+	}
+	.popUp {
+		color: $third;
+		position: absolute;
+		top: 150px;
+		border-radius: 20px;
+		background-color: $secondary;
+		padding: 10px 20px;
+		left: 25px;
+		transition: 0.5s ease-in-out;
+	}
+	.joinBtn:hover {
+		color: $third;
+		background-color: $primary;
+		opacity: 0.2;
+		transition: ease-in-out;
+		transition: 0.5s;
+	}
 }

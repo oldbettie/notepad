@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import Subject from "../components/Subject";
 import styles from "../pages/Subjects.module.scss";
 import SubjectParticipant from "../components/SubjectParticipant";
+import NewSubject from "../components/NewSubject";
 
 function Subjects() {
 	let params = useParams();
@@ -97,22 +98,22 @@ function Subjects() {
 
 	return (
 		<div className={styles.subjectsMain}>
-			<h2 className={styles.subjectsTitle}>Welcome to your Subjects</h2>
-			{status && (
-				<>
-					{newSubject ? (
-						<Button content="NewSubject" onClick={writeSubject} />
-					) : (
-						<SubjectForm />
-					)}
-				</>
-			)}
-			<div >
+			<h2 className={styles.subjectsTitle}>Your Subjects</h2>
+
+			<div>
 				<div className={styles.subjectHolder}>
-					<h3 className={styles.subjectsSubTitle}>Created subjects</h3>
 					<div className={styles.subjectsContainer}>
+						{status && (
+							<>
+								{newSubject ? (
+									<NewSubject onClick={writeSubject} />
+								) : (
+									<SubjectForm />
+								)}
+							</>
+						)}
 						{ownSubjects.map((subject) => {
-							return <Subject subject={subject} />;
+							return <Subject subject={subject} key={subject.id} />;
 						})}
 					</div>
 				</div>
@@ -120,12 +121,13 @@ function Subjects() {
 					<h3 className={styles.subjectsSubTitle}>Subjects you are part of</h3>
 					<div className={styles.subjectsContainer}>
 						{participation.map((subject) => {
-							return <SubjectParticipant subject={subject} />;
+							return (
+								<SubjectParticipant subject={subject} key={subject.id} />
+							);
 						})}
 					</div>
 				</div>
 			</div>
-
 		</div>
 	);
 }
