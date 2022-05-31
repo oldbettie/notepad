@@ -14,31 +14,32 @@ function Subjects() {
 	const [newSubject, setNewSubject] = useState(true);
 	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
 	const URL = process.env.REACT_APP_URL;
-	const URLFRONT = 'http://localhost:3001/';
-	const [participation, setParticipation] = useState(['Currently not participating in other subjects']);
+	const URLFRONT = process.env.REACT_APP_URLFRONT;
+	const [participation, setParticipation] = useState([
+		"Currently not participating in other subjects",
+	]);
 
 	function checkForInvite() {
-		const isInvite = window.localStorage.getItem('invite');
-		if(isInvite) {
+		const isInvite = window.localStorage.getItem("invite");
+		if (isInvite) {
 			//set User to subject
 			const redirectUrl = `${URLFRONT}subject/${isInvite}`;
-			localStorage.removeItem('invite');
+			localStorage.removeItem("invite");
 			const userId = params.id;
 			const subjectId = isInvite;
 			const data = {
 				userId: userId,
-				subjectId: subjectId
-			}
-			console.log('dataObject =', data);
-			axios.post(`${URL}subjects/addUser`, data)
-			.then(()=> {
+				subjectId: subjectId,
+			};
+			console.log("dataObject =", data);
+			axios.post(`${URL}subjects/addUser`, data).then(() => {
 				window.location.replace(redirectUrl);
-			})
+			});
 		} else {
-			console.log('no invite')
+			console.log("no invite");
 		}
 	}
-	
+
 	useEffect(() => {
 		checkForInvite();
 	}, []);

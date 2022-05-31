@@ -27,7 +27,6 @@ function Login() {
 					setLoginStatus(false);
 					setError(res.data.message);
 				} else {
-					console.log(res.data);
 					setUser({
 						auth: true,
 						id: res.data.userId,
