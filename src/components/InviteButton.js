@@ -2,11 +2,12 @@ import React, { useState } from "react";
 
 function InviteButton(props) {
 	const URL = process.env.REACT_APP_URL;
-	const URLFRONT = process.env.REACT_APP_URLFRONT;
+	// const FRONT = "http://localhost:3001/";
+	const FRONT = process.env.FRONT;
 	const [createInvite, setCreateInvite] = useState(true);
 	const [inviteLink, setInviteLink] = useState("");
 	const subId = props.subjectId;
-	const linkText = `${URLFRONT}subject/${subId}`;
+	const linkText = `${FRONT}subject/${subId}`;
 	const [copyInvite, setCopyInvite] = useState("Copy Invite");
 
 	function createLinkInvite() {

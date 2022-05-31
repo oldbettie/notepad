@@ -107,11 +107,12 @@ function Note({ content, scale, load, keyID }) {
 			!e.ctrlKey && setMouse("grab");
 		});
 	}, []);
+
 	useEffect(() => {
 		if (user !== null) {
 			setUserState(true);
 		}
-	}, []);
+	}, [user]);
 
 	if (content) {
 		return (
@@ -129,7 +130,7 @@ function Note({ content, scale, load, keyID }) {
 				}}
 				onMouseDown={mouseDown}
 				onMouseUp={updateNote}>
-				{content.userId === user.id && (
+				{content.userId === user?.id && (
 					<div>
 						<Button
 							style={{ color: content.color }}

@@ -67,7 +67,7 @@ function EditProfile() {
 		user && (
 			<div className={styles.formContainer}>
 				<form onSubmit={updateUser}>
-					<h3>Update user info</h3>
+					<h3>Update your info</h3>
 					<label>First Name</label>
 					<input
 						placeholder="You can leave this blank if you like.."
@@ -96,6 +96,7 @@ function EditProfile() {
 							setUserName(event.target.value);
 						}}
 					/>
+					<label>Color - Must be a valid hex code</label>
 					<input
 						placeholder="set Custom color must be real hexcode"
 						type="text"

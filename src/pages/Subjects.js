@@ -14,7 +14,7 @@ function Subjects() {
 	const [newSubject, setNewSubject] = useState(true);
 	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
 	const URL = process.env.REACT_APP_URL;
-	const URLFRONT = process.env.REACT_APP_URLFRONT;
+	const FRONT = process.env.FRONT;
 	const [participation, setParticipation] = useState([
 		"Currently not participating in other subjects",
 	]);
@@ -23,7 +23,7 @@ function Subjects() {
 		const isInvite = window.localStorage.getItem("invite");
 		if (isInvite) {
 			//set User to subject
-			const redirectUrl = `${URLFRONT}subject/${isInvite}`;
+			const redirectUrl = `${FRONT}subject/${isInvite}`;
 			localStorage.removeItem("invite");
 			const userId = params.id;
 			const subjectId = isInvite;
