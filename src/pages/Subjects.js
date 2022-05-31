@@ -118,8 +118,10 @@ function Subjects() {
 				<div className={styles.subjectHolder}>
 					<h3 className={styles.subjectsSubTitle}>Subjects you have joined</h3>
 					<div className={styles.subjectsContainer}>
-						{participation.map((subject, index) => {
-							return <SubjectParticipant subject={subject} key={index} />;
+						{participation.map((subject) => {
+							return (
+								<SubjectParticipant subject={subject} ownerId={subject.ownerId} key={subject.id} />
+							);
 						})}
 					</div>
 				</div>
