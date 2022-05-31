@@ -4,7 +4,6 @@ import axios from "axios";
 import SubjectEditForm from "./SubjectEditForm";
 import Button from "./Button";
 import styles from "./Subject.module.scss";
-import InviteButton from "./InviteButton";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiPencil } from "react-icons/bi";
 import { FiUsers } from "react-icons/fi";
@@ -13,7 +12,6 @@ function Subject({ subject }) {
 	const URL = process.env.REACT_APP_URL;
 	const [edit, setEdit] = useState(true);
 	const FRONT = process.env.FRONT;
-	const [createInvite, setCreateInvite] = useState(true);
 	const [inviteLink, setInviteLink] = useState("");
 	const linkText = `${FRONT}subject/${subject.id}`;
 	const [copied, setCopied] = useState(false);

@@ -72,7 +72,6 @@ function Login() {
 							}}
 						/>
 						<Button content="Sign in" classnames={styles.btnLogin} />
-						{/* {error && <h4>{error}</h4>} */}
 					</form>
 					<div className={styles.signupContainer}>
 						<h4>Not a member?? sign up today!! </h4>

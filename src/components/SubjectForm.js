@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../UserContext";
 import { useParams } from "react-router-dom";
@@ -7,7 +6,6 @@ import styles from "./SubjectForm.module.scss";
 
 function SubjectForm() {
 	let params = useParams();
-	const nav = useNavigate();
 	const data = localStorage.getItem("userData");
 	const token = JSON.parse(data).token;
 	const URL = process.env.REACT_APP_URL;

@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Button from "./Button";
 import styles from "../components/Subject.module.scss";
 
 function SubjectParticipant({ subject }) {
@@ -12,7 +11,6 @@ function SubjectParticipant({ subject }) {
 				<h4 className={styles.titleHeader}>
 					{subject.title}
 				</h4>
-				{/* <Button content="Join" />	 */}
 			</div>
 		</NavLink>
 	);
