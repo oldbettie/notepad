@@ -6,6 +6,12 @@ $third: #444444;
 	padding: 0;
 	box-sizing: border-box;
 }
+
+@font-face {
+	font-family: 'peaelliebellie';
+	src: local('peaelliebellie'), url(./fonts/peaelliebellie.ttf) format('truetype');
+}
+
 body {
 	color: $third;
 
