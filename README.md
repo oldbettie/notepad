@@ -39,11 +39,9 @@ Password: chicken
 ## Features
 
 1. signup/login/logout
-
    Using safe best practices for login signup and server requests. Requiring an email, username and secure password.
 
 2. Edit your profile.
-
    Able to edit your preferences including setting a custom note color via hex code.
 
 3. Create Classrooms.
