@@ -107,7 +107,7 @@ function Subject() {
 				initial: () => [crop.x, crop.y],
 			},
 			pinch: {
-				distanceBounds: { min: -10000 },
+				distanceBounds: { min: -12000 },
 			},
 			domTarget: imageRef,
 			eventOptions: { passive: false },
@@ -185,7 +185,7 @@ function Subject() {
 				style={{
 					left: crop.x,
 					top: crop.y,
-					touchAction: "pinch-zoom",
+					touchAction: "none",
 					transform: `scale(${crop.scale})`,
 					cursor: mouse,
 				}}>

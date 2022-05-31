@@ -24,7 +24,7 @@ function Login() {
 			})
 			.then((res) => {
 				if (!res.data.auth) {
-					setLoginStatus(false);
+					setLoginStatus(true);
 					setError(res.data.message);
 				} else {
 					setUser({

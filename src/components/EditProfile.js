@@ -41,7 +41,7 @@ function EditProfile() {
 					window.location.reload();
 				});
 		} else {
-			setError("code not accepted");
+			setError("color not accepted must be a valid hex value!");
 		}
 	}
 
