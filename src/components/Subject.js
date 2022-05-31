@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import SubjectEditForm from "./SubjectEditForm";
 import Button from "./Button";
-import styles from "../pages/Subjects.module.scss";
+import styles from "../components/Subject.module.scss";
 import InviteButton from "./InviteButton";
 
 function Subject({ subject }) {
@@ -21,17 +21,19 @@ function Subject({ subject }) {
 	}
 
 	return (
-		<div key={subject.id} className={styles.subjectsContainer}>
+		<div key={subject.id} className={styles.subjectContainer}>
 			{edit ? (
-				<div>
-					{subject.title}
+				<>
+					<h4 className={styles.titleHeader}>
+						{subject.title}
+					</h4>
 					<NavLink to={`/subject/${subject.id}`}>
 						<Button content="Join" />
 					</NavLink>
 					<Button content="Edit" onClick={() => setEdit(!edit)} />
-					<Button content="Delete" onClick={() => deleteSubject(subject.id)} />
-					<InviteButton subjectId={subject.id} />
-				</div>
+					<Button className={styles.deleteBtn} content="Delete" onClick={() => deleteSubject(subject.id)} />
+					<InviteButton className={styles.inviteBtn} subjectId={subject.id} />
+				</>
 			) : (
 				<SubjectEditForm id={subject.id} />
 			)}

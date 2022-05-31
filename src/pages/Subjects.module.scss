@@ -1,11 +1,12 @@
-$primary: #ffffff;
-$secondary: #cccccc;
-$third: #444444;
+.subjectsMain {
+	margin: 0 auto;
+	text-align: center;
+}
 
 .subjectsContainer {
 	display: flex;
+	flex-wrap: wrap;
+	text-align: center;
 	align-items: center;
-	justify-content: space-between;
-	margin: 1em;
-	max-width: 600px;
+	justify-content: center;
 }

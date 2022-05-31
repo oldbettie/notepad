@@ -25,12 +25,12 @@ function InviteButton(props) {
 	return (
         <>
             { createInvite ? (
-                <button onClick={() => createLinkInvite()}>
+                <button className="btn-invite" onClick={() => createLinkInvite()}>
                     Create Invite
                 </button>
             ) : (
                 <span className="linkInvite">
-                <button onClick={() => copyTextToClipboard()}>{copyInvite}</button> 
+                <button className="btn-invite" onClick={() => copyTextToClipboard()}>{copyInvite}</button> 
                 </span>
             )}
         </>

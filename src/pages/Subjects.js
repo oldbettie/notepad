@@ -5,6 +5,7 @@ import axios from "axios";
 import SubjectForm from "../components/SubjectForm";
 import Button from "../components/Button";
 import Subject from "../components/Subject";
+import styles from "../pages/Subjects.module.scss";
 import SubjectParticipant from "../components/SubjectParticipant";
 
 function Subjects() {
@@ -41,6 +42,7 @@ function Subjects() {
 	
 	useEffect(() => {
 		checkForInvite();
+		getAllSubjects();
 	}, []);
 
 	function writeSubject() {
@@ -52,7 +54,7 @@ function Subjects() {
 			setStatus(user.auth);
 			if (user.auth) {
 				setNewSubject(true);
-				getAllSubjects();
+				//getAllSubjects();
 			}
 		} else {
 			setStatus(false);
@@ -69,10 +71,9 @@ function Subjects() {
 		getSubjects();
 	}, [status]);
 
-	//gets all subjects and looks for the user participation. Adds those to participation state as an []
 	function getAllSubjects() {
 		const userSubjects = [];
-		let thisUser = params.id;
+		let thisUser = parseInt(params.id);
 		axios
 			.get(`${URL}subjects/all`)
 			.then((res) => {
@@ -94,7 +95,7 @@ function Subjects() {
 	}
 
 	return (
-		<div>
+		<div className={styles.subjectsMain}>
 			<h2>Welcome to your Subjects</h2>
 			{status && (
 				<>
@@ -105,18 +106,25 @@ function Subjects() {
 					)}
 				</>
 			)}
-			<div>
-				<h3>Created subjects</h3>
-				{ownSubjects.map((subject) => {
-					return <Subject subject={subject} />;
-				})}
+			<div >
+				<div className={styles.subjectHolder}>
+					<h3>Created subjects</h3>
+					<div className={styles.subjectsContainer}>
+						{ownSubjects.map((subject) => {
+							return <Subject subject={subject} />;
+						})}
+					</div>
+				</div>
+				<div className={styles.subjectHolder}>
+					<h3>Subjects you are part of</h3>
+					<div className={styles.subjectsContainer}>
+						{participation.map((subject) => {
+							return <SubjectParticipant subject={subject} />;
+						})}
+					</div>
+				</div>
 			</div>
-			<div>
-				<h3>Subjects you are part of</h3>
-				{participation.map((subject) => {
-					return <SubjectParticipant subject={subject} />;
-				})}
-			</div>
+
 		</div>
 	);
 }
