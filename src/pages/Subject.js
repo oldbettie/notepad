@@ -39,9 +39,6 @@ function Subject() {
 				});
 				setAllUsers(userNames);
 			});
-		setTimeout(() => {
-			allSubjectUsers();
-		}, 5000);
 	}
 
 	function pickUsersToJoin() {
@@ -68,8 +65,11 @@ function Subject() {
 	}, [user, subject]);
 
 	useEffect(() => {
-		allSubjectUsers();
+		const usersubjectInt = setInterval(() => {
+			allSubjectUsers();
+		}, 20000);
 		setNewUserFlag(false);
+		return () => clearInterval(usersubjectInt);
 	}, [newUserFlag]);
 
 	// controls the overall board movement and zoom
@@ -107,7 +107,7 @@ function Subject() {
 				initial: () => [crop.x, crop.y],
 			},
 			pinch: {
-				distanceBounds: { min: -10000 },
+				distanceBounds: { min: -12000 },
 			},
 			domTarget: imageRef,
 			eventOptions: { passive: false },
@@ -134,9 +134,6 @@ function Subject() {
 				setNoteTrue(true);
 			})
 			.catch((err) => setError(err));
-		setTimeout(() => {
-			getNotes();
-		}, 10000);
 	}
 
 	useEffect(() => {
@@ -158,7 +155,11 @@ function Subject() {
 	// runs once subject has returned
 	useEffect(() => {
 		if (subject !== null) {
+			const noteInt = setInterval(() => {
+				getNotes();
+			}, 5000);
 			getNotes();
+			return () => clearInterval(noteInt);
 		}
 	}, [subject]);
 
@@ -185,7 +186,7 @@ function Subject() {
 				style={{
 					left: crop.x,
 					top: crop.y,
-					touchAction: "pinch-zoom",
+					touchAction: "none",
 					transform: `scale(${crop.scale})`,
 					cursor: mouse,
 				}}>

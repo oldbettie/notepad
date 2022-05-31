@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# Team Notes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://noteteams.netlify.app
+<br/>
 
-## Available Scripts
+Team notes is the latest addition to the education and note taking tool belt. providing users with the ability to colaborate on notes for different classes they might be attending. our interactive board provides the user an easy navigation and interactive experience. write move edit and delete notes as needed and then download a txt file of the session that you can print out and use for things like note cards and highlighting.
 
-In the project directory, you can run:
+<br/>
 
-### `npm start`
+this is the final project for our General Assembly Software Engineering Immersive Course.
+This web application follow RESTful api best practices and utilizes React.js as the frontend and Express as the backend. the database we chose to use was mySQL with sequelizer. although the app is completely mobile responsive its best experienced on a desktop on laptop.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Collaborators:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-   [JJ Eaton] (https://github.com/oldbettie)
+-   [Pedro Vivas] (https://github.com/MrDrops)
 
-### `npm test`
+### Test Login
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+you can creat your own account for a blank board or logging into the below user will show a basic example of a board with multiple users and several notes.
 
-### `npm run build`
+<pre>
+Email: travis@ga.co
+Password: chicken
+</pre>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. signup/login/logout
+   Using safe best practices for login signup ect. requiring an email and username and secure password.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Edit your profile.
 
-### `npm run eject`
+    Able to edit your preferences including setting a custom note color via hex code.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Create Classrooms.
+   All users are able to create, edit, delete and invite others to all the rooms they like.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Join Other Classrooms.
+   join your friends or peers in there classrooms and automatically adds it to your que so you can come back at any time.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. The Board
+   The board is the main functionality of the application and allows all users to join contribute update and delete their own notes. the notes can be positioned to best fit the groups use the board is completely interactive. notes can be moved the board itself can be moved and you can zoom in and out as you please by holding ctrl and mouse wheel up or down or on a laptop holding ctrl and 2 finger slide up or down. this is best experienced on desktop but will work on mobile also but the zoom ratio is much less then the desktop experience.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+6. Customimation and download.
+   the download is a very basic feature but allows the notes to be downloaded as a basic txt document for use later or to be printed out later. you can change and modify a few preferences in the board itself like the note color ect. more features will be added over time.
 
-## Learn More
+## Bugs
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. its more of an annoyance then a bug but the backend does go to sleep due to the free tier of heroku and i wasnt about to pay for it myself nice try heroku...
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. the notes all stick in the same position this again isnt a bug but more of an annoyance i may add some logic to place it center on the screen on submit but right now thats not a concern.
 
-### Code Splitting
+3. occasionally will drop to a blank screen on refresh if too many requests happen at once. its really hard to replicate to debug and is a work in progress. but its about once every 200 board renders.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. the session logic sometimes has issues this should be fixed in the live version it appears to be a local issue.
 
-### Analyzing the Bundle Size
+## updates
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+may 31st. 2022
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. patched requests to dismount should be much more responsive now.
+2. finallised 1.0 styling
