@@ -3,7 +3,6 @@ import { UserContext } from "../UserContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import SubjectForm from "../components/SubjectForm";
-import Button from "../components/Button";
 import Subject from "../components/Subject";
 import styles from "../pages/Subjects.module.scss";
 import SubjectParticipant from "../components/SubjectParticipant";
@@ -11,7 +10,7 @@ import NewSubject from "../components/NewSubject";
 
 function Subjects() {
 	let params = useParams();
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const [status, setStatus] = useState(false);
 	const [newSubject, setNewSubject] = useState(true);
 	const [ownSubjects, setOwnSubjects] = useState(["You have no subjects"]);
@@ -72,6 +71,7 @@ function Subjects() {
 		getSubjects();
 	}, [status]);
 
+	// this is subjects user has joined not owner!
 	function getAllSubjects() {
 		const userSubjects = [];
 		let thisUser = parseInt(params.id);
