@@ -41,6 +41,7 @@ function Subject() {
 			});
 	}
 
+	//takes users joined and adds them to participants
 	function pickUsersToJoin() {
 		let owner = subject.ownerId;
 		if (owner !== user.id) {
@@ -167,6 +168,7 @@ function Subject() {
 	useEffect(() => {
 		getSubject();
 	}, []);
+	
 	return (
 		<div className={styles.outofbounds}>
 			<Users color={color} userList={allUsers} />

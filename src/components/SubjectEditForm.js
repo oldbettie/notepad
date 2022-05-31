@@ -10,8 +10,7 @@ function SubjectEditForm({id}) {
 	const URL = process.env.REACT_APP_URL;
 	const { user, setUser } = useContext(UserContext);
 	const [title, setTitle] = useState("");
-	const [participants, setParticipants] = useState(['no participants yet']);
-	console.log(user);
+	
 	function updateSubject(e) {
 		e.preventDefault();
 		axios

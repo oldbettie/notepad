@@ -2,8 +2,7 @@ import axios from "axios";
 
 // pretty sure this entire file is redundent
 export function getUserAuth() {
-	//const URL = process.env.REACT_APP_URL;
-	const URL = 'http://localhost:3000/'
+	const URL = process.env.REACT_APP_URL;
 
 	axios
 		.get(`${URL}isAuth`, {

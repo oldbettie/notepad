@@ -55,7 +55,6 @@ function Subjects() {
 			setStatus(user.auth);
 			if (user.auth) {
 				setNewSubject(true);
-				//getAllSubjects();
 			}
 		} else {
 			setStatus(false);
