@@ -11,7 +11,7 @@ import { FiUsers } from "react-icons/fi";
 function Subject({ subject }) {
 	const URL = process.env.REACT_APP_URL;
 	const [edit, setEdit] = useState(true);
-	const FRONT = process.env.FRONT;
+	const FRONT = "https://noteteams.netlify.app/";
 	const [inviteLink, setInviteLink] = useState("");
 	const linkText = `${FRONT}subject/${subject.id}`;
 	const [copied, setCopied] = useState(false);

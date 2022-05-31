@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FiUsers } from "react-icons/fi";
+import { UserContext } from "../UserContext";
 import styles from "./Users.module.scss";
 
-function Users( props ) {
-	const {color, userList} = props
+function Users({ userList }) {
+	const { user } = useContext(UserContext);
 	const [open, setOpen] = useState(false);
 	const [userCount, setUserCount] = useState(0);
 	const [users, setUsers] = useState([
@@ -38,12 +39,12 @@ function Users( props ) {
 					style={{ height: `${40 * userCount}px` }}>
 					<div className={styles.allUsersContainer}>
 						<div className={styles.currentUser}>
-							<h6>oldbettie</h6>
+							<h6>{user.userName}</h6>
 							<FiUsers />
 						</div>
-						{users.map((user) => {
+						{users.map((user, index) => {
 							return (
-								<div className={styles.usersBox}>
+								<div className={styles.usersBox} key={index}>
 									<h6>{user.userName}</h6>
 									<FiUsers />
 								</div>
