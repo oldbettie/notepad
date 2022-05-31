@@ -120,7 +120,7 @@ function Subjects() {
 					<div className={styles.subjectsContainer}>
 						{participation.map((subject) => {
 							return (
-								<SubjectParticipant subject={subject} key={subject.id} />
+								<SubjectParticipant subject={subject} ownerId={subject.ownerId} key={subject.id} />
 							);
 						})}
 					</div>
