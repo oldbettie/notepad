@@ -185,7 +185,7 @@ function Subject() {
 				style={{
 					left: crop.x,
 					top: crop.y,
-					touchAction: "none",
+					touchAction: "pinch-zoom",
 					transform: `scale(${crop.scale})`,
 					cursor: mouse,
 				}}>
