@@ -2,7 +2,13 @@
 
 https://noteteams.netlify.app
 <br/>
+<br/>
 
+![notepad-home-page](https://user-images.githubusercontent.com/35677595/171305163-134969ca-8f65-4b11-9f7c-787552a6e780.png)
+
+![notepad-main-board-menu](https://user-images.githubusercontent.com/35677595/171305182-19dcd379-67cd-46cb-9a15-d6d8e312e40a.png)
+
+![notepad-main-subject-board](https://user-images.githubusercontent.com/35677595/171305193-23054ee1-6aca-4a0c-9287-1c7d5ccae895.png)
 
 
 Team notes is the latest addition to the education and note taking tool belt. providing users with the ability to collaborate on notes for different classes they might be attending. our interactive board provides the user an easy navigation and interactive experience. Write move edit and delete notes as needed and then download a .txt file of the session that can be printed out and used for things like reviewing, creating note cards and highlighting.
