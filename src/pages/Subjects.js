@@ -20,29 +20,29 @@ function Subjects() {
 		"Currently not participating in other subjects",
 	]);
 
-	function checkForInvite() {
-		const isInvite = window.localStorage.getItem("invite");
-		if (isInvite) {
-			//set User to subject
-			const redirectUrl = `${FRONT}subject/${isInvite}`;
-			localStorage.removeItem("invite");
-			const userId = params.id;
-			const subjectId = isInvite;
-			const data = {
-				userId: userId,
-				subjectId: subjectId,
-			};
-			console.log("dataObject =", data);
-			axios.post(`${URL}subjects/addUser`, data).then(() => {
-				window.location.replace(redirectUrl);
-			});
-		} else {
-			console.log("no invite");
-		}
-	}
+	// function checkForInvite() {
+	// 	// const isInvite = window.localStorage.getItem("invite");
+	// 	// if (isInvite) {
+	// 	//set User to subject
+	// 	// const redirectUrl = `https://noteteams.netlify.app/subject/${isInvite}`;
+	// 	// localStorage.removeItem("invite");
+	// 	const userId = user.id;
+	// 	const subjectId = isInvite;
+	// 	const data = {
+	// 		userId: userId,
+	// 		subjectId: subjectId,
+	// 	};
+	// 	// console.log("dataObject =", data);
+	// 	axios.post(`${URL}subjects/addUser`, data).then(() => {
+	// 		// window.location.replace(redirectUrl);
+	// 	});
+	// 	// } else {
+	// 	// 	console.log("no invite");
+	// 	// }
+	// }
 
 	useEffect(() => {
-		checkForInvite();
+		// checkForInvite();
 		getAllSubjects();
 	}, []);
 
@@ -120,7 +120,11 @@ function Subjects() {
 					<div className={styles.subjectsContainer}>
 						{participation.map((subject) => {
 							return (
-								<SubjectParticipant subject={subject} ownerId={subject.ownerId} key={subject.id} />
+								<SubjectParticipant
+									subject={subject}
+									ownerId={subject.ownerId}
+									key={subject.id}
+								/>
 							);
 						})}
 					</div>
