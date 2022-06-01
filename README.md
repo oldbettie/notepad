@@ -27,7 +27,7 @@ Full-stack web application with Interactive UI, User/Sessions and RESTful API be
 
 ### Test Login
 
-A new user account can be created for a blank board
+A new user account can be created for a blank board. </br>
 logging with the test user below will show a pre-set board with multiple users and several notes.
 
 <pre>
@@ -39,11 +39,9 @@ Password: chicken
 ## Features
 
 1. signup/login/logout
-
    Using safe best practices for login signup and server requests. Requiring an email, username and secure password.
 
 2. Edit your profile.
-
    Able to edit your preferences including setting a custom note color via hex code.
 
 3. Create Classrooms.
