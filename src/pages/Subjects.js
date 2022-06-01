@@ -19,6 +19,7 @@ function Subjects() {
 	const [participation, setParticipation] = useState([
 		"Currently not participating in other subjects",
 	]);
+	console.log(participation);
 
 	// function checkForInvite() {
 	// 	// const isInvite = window.localStorage.getItem("invite");
@@ -91,7 +92,10 @@ function Subjects() {
 						}
 					}
 				}
-				setParticipation(userSubjects);
+				const filteredSubjects = userSubjects.filter((userlist) => {
+					return userlist.ownerId !== user.id;
+				});
+				setParticipation(filteredSubjects);
 			});
 	}
 
