@@ -32,6 +32,8 @@ $postit: #ffff88;
 	cursor: pointer;
 	.allUsersContainer {
 		width: 100%;
+		text-transform: capitalize;
+
 		.currentUser {
 			display: flex;
 			justify-content: space-between;
@@ -42,6 +44,18 @@ $postit: #ffff88;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+		}
+		.inviteContainer {
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			.inviteBtn {
+				border: 1px solid $third;
+				border-radius: 10px;
+				width: 100px;
+				padding: 0;
+				text-align: center;
+			}
 		}
 	}
 }
