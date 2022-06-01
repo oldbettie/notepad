@@ -26,7 +26,7 @@ function Subjects() {
 		if (isInvite) {
 			//set User to subject
 			const redirectUrl = `${FRONT}subject/${isInvite}`;
-			localStorage.removeItem("invite");
+			window.localStorage.removeItem("invite");
 			const userId = params.id;
 			const subjectId = isInvite;
 			const data = {
