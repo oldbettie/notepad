@@ -74,6 +74,12 @@ Password: chicken
 
 4. Issue related to session logic using app locally. Live version does not display the same behaviour.
 
+## Future improvements
+
+- Add UUID to new generated subject Id's
+- Make exports to PDF
+- Option to select what notes to export
+
 ## Updates
 
 may 31st. 2022
