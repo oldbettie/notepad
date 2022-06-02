@@ -25,6 +25,7 @@ function Subject() {
 	const [color, setColor] = useState("#ffff88");
 	const [allUsers, setAllUsers] = useState([]);
 	const [newUserFlag, setNewUserFlag] = useState(false);
+	const [userIds, setUserIds] = useState([]);
 
 	//get all participants for this subject
 	async function allSubjectUsers() {
@@ -34,12 +35,33 @@ function Subject() {
 				return res.data;
 			})
 			.then((userArray) => {
+				const ids = [];
 				let userNames = userArray.map((user) => {
+					ids.push(user.id);
+					setUserIds(ids);
 					return { userName: user.userName };
 				});
 				setAllUsers(userNames);
 			});
 	}
+
+	function postInvite() {
+		if (userIds.includes(user.id)) {
+			return;
+		}
+		const userId = user.id;
+		const subjectId = params.id;
+		const data = {
+			userId: userId,
+			subjectId: subjectId,
+		};
+		axios.post(`${URL}subjects/addUser`, data).then(() => {});
+	}
+	useEffect(() => {
+		if (user) {
+			postInvite();
+		}
+	}, [user]);
 
 	//takes users joined and adds them to participants
 	function pickUsersToJoin() {

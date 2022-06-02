@@ -41,9 +41,14 @@ function Login() {
 							id: res.data.userId,
 						})
 					);
-
-					setLoginStatus(true);
-					nav(`/subjects/${res.data.userId}`);
+					const invite = window.localStorage.getItem("invite");
+					if (invite) {
+						nav(`/subject/${invite}`);
+						localStorage.removeItem("invite");
+					} else {
+						setLoginStatus(true);
+						nav(`/subjects/${res.data.userId}`);
+					}
 				}
 			})
 			.catch((err) => setError(err));

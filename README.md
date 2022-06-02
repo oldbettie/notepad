@@ -2,8 +2,16 @@
 
 https://noteteams.netlify.app
 <br/>
+<br/>
 
-
+<p align="center">
+<img src="https://user-images.githubusercontent.com/35677595/171305163-134969ca-8f65-4b11-9f7c-787552a6e780.png" width="353" height="215">
+<img src="https://user-images.githubusercontent.com/35677595/171305182-19dcd379-67cd-46cb-9a15-d6d8e312e40a.png" width="353" height="215">
+<img src="https://user-images.githubusercontent.com/35677595/171305193-23054ee1-6aca-4a0c-9287-1c7d5ccae895.png" width="353" height="215">
+<img src="https://user-images.githubusercontent.com/35677595/171306190-c12e20a7-6291-4aa2-b659-f7adbf5534be.png" width="353" height="215">
+</p>
+   
+<br/>
 
 Team notes is the latest addition to the education and note taking tool belt. providing users with the ability to collaborate on notes for different classes they might be attending. our interactive board provides the user an easy navigation and interactive experience. Write move edit and delete notes as needed and then download a .txt file of the session that can be printed out and used for things like reviewing, creating note cards and highlighting.
 
@@ -27,7 +35,7 @@ Full-stack web application with Interactive UI, User/Sessions and RESTful API be
 
 ### Test Login
 
-A new user account can be created for a blank board
+A new user account can be created for a blank board. </br>
 logging with the test user below will show a pre-set board with multiple users and several notes.
 
 <pre>
@@ -39,11 +47,9 @@ Password: chicken
 ## Features
 
 1. signup/login/logout
-
    Using safe best practices for login signup and server requests. Requiring an email, username and secure password.
 
 2. Edit your profile.
-
    Able to edit your preferences including setting a custom note color via hex code.
 
 3. Create Classrooms.
@@ -67,6 +73,12 @@ Password: chicken
 3. Rare Issue regarding blank screen in case of overload due to requests exceeding capacity. Hard to replicate, estimated ocurrence, 1 in every 200 renders aproximately.
 
 4. Issue related to session logic using app locally. Live version does not display the same behaviour.
+
+## Future improvements
+
+- Add UUID to new generated subject Id's
+- Make exports to PDF
+- Option to select what notes to export
 
 ## Updates
 

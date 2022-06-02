@@ -19,6 +19,12 @@ $third: #444444;
 		font-size: 30px;
 		text-transform: capitalize;
 	}
+
+	.subOwner {
+		color: $secondary;
+		padding-top: 170px;
+		font-size: 20px;
+	}
 	.Btn {
 		position: absolute;
 		color: $secondary;
@@ -79,10 +85,4 @@ $third: #444444;
 		transition: ease-in-out;
 		transition: 0.5s;
 	}
-
-	.subOwner {
-		color: white;
-	}
 }
-
-
