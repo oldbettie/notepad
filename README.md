@@ -4,7 +4,7 @@ https://noteteams.netlify.app
 <br/>
 <br/>
 
-<p>
+<p align="center">
 <img src="https://user-images.githubusercontent.com/35677595/171305163-134969ca-8f65-4b11-9f7c-787552a6e780.png" width="353" height="215">
 <img src="https://user-images.githubusercontent.com/35677595/171305182-19dcd379-67cd-46cb-9a15-d6d8e312e40a.png" width="353" height="215">
 <img src="https://user-images.githubusercontent.com/35677595/171305193-23054ee1-6aca-4a0c-9287-1c7d5ccae895.png" width="353" height="215">
@@ -73,6 +73,12 @@ Password: chicken
 3. Rare Issue regarding blank screen in case of overload due to requests exceeding capacity. Hard to replicate, estimated ocurrence, 1 in every 200 renders aproximately.
 
 4. Issue related to session logic using app locally. Live version does not display the same behaviour.
+
+## Future improvements
+
+- Add UUID to new generated subject Id's
+- Make exports to PDF
+- Option to select what notes to export
 
 ## Updates
 
