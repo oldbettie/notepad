@@ -19,28 +19,6 @@ function Subjects() {
 	const [participation, setParticipation] = useState([
 		"Currently not participating in other subjects",
 	]);
-	console.log(participation);
-
-	// function checkForInvite() {
-	// 	// const isInvite = window.localStorage.getItem("invite");
-	// 	// if (isInvite) {
-	// 	//set User to subject
-	// 	// const redirectUrl = `https://noteteams.netlify.app/subject/${isInvite}`;
-	// 	// localStorage.removeItem("invite");
-	// 	const userId = user.id;
-	// 	const subjectId = isInvite;
-	// 	const data = {
-	// 		userId: userId,
-	// 		subjectId: subjectId,
-	// 	};
-	// 	// console.log("dataObject =", data);
-	// 	axios.post(`${URL}subjects/addUser`, data).then(() => {
-	// 		// window.location.replace(redirectUrl);
-	// 	});
-	// 	// } else {
-	// 	// 	console.log("no invite");
-	// 	// }
-	// }
 
 	useEffect(() => {
 		// checkForInvite();
