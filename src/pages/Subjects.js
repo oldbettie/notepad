@@ -21,7 +21,6 @@ function Subjects() {
 	]);
 
 	useEffect(() => {
-		// checkForInvite();
 		getAllSubjects();
 	}, []);
 
