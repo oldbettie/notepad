@@ -61,7 +61,7 @@ function Subject({ subject }) {
 					/>
 
 					<Button
-						content={<FiUsers />}
+						content={"Share"}
 						classnames={`${styles.inviteBtn} ${styles.Btn}`}
 						onClick={() => copyTextToClipboard()}
 					/>

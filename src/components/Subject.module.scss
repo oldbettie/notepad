@@ -45,8 +45,13 @@ $third: #444444;
 		bottom: 0px;
 	}
 	.inviteBtn {
-		left: 95px;
-		bottom: 0px;
+		left: 67px;
+		bottom: -3px;
+		border: 1px solid $secondary;
+		border-radius: 15px;
+		width: 95px;
+		height: 34px;
+		font-size: 28px;
 	}
 	.joinBtn {
 		width: 240px;
