@@ -21,6 +21,15 @@ $postit: #ffff88;
 		cursor: pointer;
 	}
 }
+.copiedLink {
+	position: fixed;
+	right: 200px;
+	background-color: $secondary;
+	padding: 3px 12px;
+	border-radius: 20px;
+	margin: 0px;
+	transition: 0.4s;
+}
 
 .userContentContainerOpen {
 	position: fixed;
